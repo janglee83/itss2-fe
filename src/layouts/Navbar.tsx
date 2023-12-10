@@ -1,7 +1,7 @@
+import HomeSvg from "assets/svg/headers/HomeSvg";
+import LogoSvg from "assets/svg/headers/LogoSvg";
+import SearchSvg from "assets/svg/headers/SearchSvg";
 import { type FunctionComponent } from "react";
-import Logo from "assets/images/headers/Logo";
-import Home from "assets/images/headers/Home";
-import Search from "assets/images/headers/Search";
 
 const NavbarComponent: FunctionComponent = () => {
   return (
@@ -17,7 +17,7 @@ const NavbarComponent: FunctionComponent = () => {
             <div className="relative">UniXP</div>
           </div>
         </div>
-        <Logo />
+        <LogoSvg />
         <div className="rounded bg-neutral-1 box-border w-[400px] flex flex-row items-center justify-start text-left text-sm text-character-disabled-placeholder-25 border-[1px] border-solid border-neutral-5">
           <div className="flex-1 overflow-hidden flex flex-row items-start justify-start py-2 px-3">
             <div className="flex-1 overflow-hidden flex flex-row items-start justify-start">
@@ -27,13 +27,13 @@ const NavbarComponent: FunctionComponent = () => {
             </div>
           </div>
           <div className="self-stretch rounded-tl-none rounded-tr rounded-br rounded-bl-none bg-primary-6 shadow-[0px_2px_0px_rgba(0,_0,_0,_0.04)] overflow-hidden flex flex-row items-center justify-center py-0 px-4 gap-[8px] text-center text-neutral-1 border-[1px] border-solid border-primary-6">
-            <Search />
+            <SearchSvg />
             <div className="relative leading-[22px] hidden">Button Title</div>
           </div>
         </div>
         <div className="rounded-sm overflow-hidden flex flex-row items-center justify-center py-[6.400000095367432px] px-[15px] gap-[10px] text-base text-neutral-1">
           <div className="bg-hitbox overflow-hidden flex flex-col items-center justify-center">
-            <Home />
+            <HomeSvg />
           </div>
           <div className="relative leading-[24px] font-semibold">TRANG CHỦ</div>
         </div>
