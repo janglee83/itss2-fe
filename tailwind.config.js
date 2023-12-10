@@ -1,6 +1,68 @@
 /** @type {import('tailwindcss').Config} */
-export const content = ["./src/**/*.{js,jsx,ts,tsx}"];
-export const theme = {
-  extend: {},
+module.exports = {
+  content: ["./src/**/*.{js,jsx,ts,tsx}"],
+  theme: {
+    extend: {
+      colors: {
+        whitesmoke: "#f0f2f5",
+        "neutral-1": "#fff",
+        "primary-6": "#1890ff",
+        "neutral-5": "#d9d9d9",
+        "character-title-85": "rgba(0, 0, 0, 0.85)",
+        hitbox: "rgba(255, 255, 255, 0)",
+        gray: {
+          100: "rgba(44, 42, 42, 0.2)",
+          200: "rgba(0, 0, 0, 0.4)",
+          300: "rgba(0, 0, 0, 0.2)",
+        },
+        "character-secondary-45": "rgba(0, 0, 0, 0.45)",
+        "neutral-2": "#fafafa",
+        "side-bar-border": "#e0e4e8",
+        "neutral-13": "#000",
+        "text-primary": "#545657",
+        "calendula-gold-1": "#fffbe6",
+        "calendula-gold-3": "#ffe58f",
+        "calendula-gold-6": "#faad14",
+        "primary-1": "#e6f7ff",
+        "primary-3": "#91d5ff",
+        "dust-red-1": "#fff1f0",
+        "dust-red-3": "#ffa39e",
+        "dust-red-6": "#f5222d",
+        "geek-blue-1": "#f0f5ff",
+        "geek-blue-3": "#adc6ff",
+        "geek-blue-6": "#2f54eb",
+        "polar-green-1": "#f6ffed",
+        "polar-green-3": "#b7eb8f",
+        "polar-green-6": "#52c41a",
+        accepted: "#18864b",
+        "button-disabled": "#c6c6c6",
+        "button-primary": "#3da9fc",
+        "neutral-6": "#bfbfbf",
+        "bg-black": "#001529",
+        "character-disabled-placeholder-25": "rgba(0, 0, 0, 0.25)",
+      },
+      spacing: {},
+      fontFamily: {
+        "body-regular": "Roboto",
+        "text-sm-text-sm": "Inter",
+        "font-awesome-5-free": "'Font Awesome 5 Free'",
+        "font-awesome-6-brands": "'Font Awesome 6 Brands'",
+        "saira-stencil-one": "'Saira Stencil One'",
+      },
+      borderRadius: {
+        "81xl": "100px",
+        mini: "15px",
+      },
+    },
+    fontSize: {
+      sm: "14px",
+      xl: "20px",
+      base: "16px",
+      xs: "12px",
+      inherit: "inherit",
+    },
+  },
+  corePlugins: {
+    preflight: false,
+  },
 };
-export const plugins = [];
