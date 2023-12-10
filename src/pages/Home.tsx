@@ -1,7 +1,7 @@
 import { type FunctionComponent } from "react";
 
 const Home: FunctionComponent = () => {
-  return <>HOME</>;
+  return <>Home</>;
 };
 
 export default Home;

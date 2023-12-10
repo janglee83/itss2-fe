@@ -1,6 +1,7 @@
 import { CssBaseline, StyledEngineProvider } from "@mui/material";
 import Routes from "./routes";
 import NavbarComponent from "./layouts/Navbar";
+import FooterComponent from "./layouts/Footer";
 
 export default function App(): JSX.Element {
   return (
@@ -9,6 +10,7 @@ export default function App(): JSX.Element {
       {/* <Provider> */}
       <NavbarComponent />
       <Routes />
+      <FooterComponent />
       {/* </Provider> */}
     </StyledEngineProvider>
   );
