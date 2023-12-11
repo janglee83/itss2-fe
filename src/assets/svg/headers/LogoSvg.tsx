@@ -9,7 +9,7 @@ const LogoSvg: FunctionComponent = () => {
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
-      <g clip-path="url(#clip0_819_358)">
+      <g clipPath="url(#clip0_819_358)">
         <path d="M3 8.5H0V17.5H3V8.5Z" fill="white" />
         <path d="M16 8.5H13V17.5H16V8.5Z" fill="white" />
         <path
