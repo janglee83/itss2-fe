@@ -1,16 +1,12 @@
-import React, { type FunctionComponent } from "react";
+import React, { useState, type FunctionComponent } from "react";
 import Button from "@mui/material/Button";
 import CreatePostDialog from "../components/ui/createQuestionDialog";
 
 const Home: FunctionComponent = () => {
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
 
-  const handleClickOpen = (): void => {
-    setOpen(true);
-  };
-
-  const handleClose = (): void => {
-    setOpen(false);
+  const handleToggle = (): void => {
+    setOpen((prevOpen) => !prevOpen);
   };
 
   return (
@@ -18,11 +14,11 @@ const Home: FunctionComponent = () => {
       <Button
         className="border border-blue-500 px-4 py-2 text-blue-500 rounded"
         variant="outlined"
-        onClick={handleClickOpen}
+        onClick={handleToggle}
       >
         Viết câu hỏi
       </Button>
-      <CreatePostDialog open={open} handleClose={handleClose} />
+      <CreatePostDialog open={open} handleClose={handleToggle} />
     </React.Fragment>
   );
 };
