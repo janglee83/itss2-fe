@@ -3,11 +3,30 @@ import { createBrowserRouter } from "react-router-dom";
 
 // import page
 const HomePage = lazy(async () => await import("pages/Home"));
+const QuestionPage = lazy(async () => await import("pages/question/index"));
+const QuestionDetailPage = lazy(
+  async () => await import("pages/question/QuestionDetail"),
+);
 
 export const MainRoutes = createBrowserRouter([
   {
     path: "/",
     element: <HomePage />,
     children: [],
+  },
+  {
+    path: "question",
+    children: [
+      {
+        path: "",
+        element: <QuestionPage />,
+        children: [],
+      },
+      {
+        path: "detail",
+        element: <QuestionDetailPage />,
+        children: [],
+      },
+    ],
   },
 ]);
