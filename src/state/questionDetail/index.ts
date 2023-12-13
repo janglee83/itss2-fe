@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { type IQuestionDetailState, initialState } from "./state";
-import { fetchQuestionDetail, createNewQuestion } from "./reducers";
+import { fetchQuestionDetail } from "./reducers";
 
 const questionDetailSlice = createSlice({
   name: "questionDetail",
