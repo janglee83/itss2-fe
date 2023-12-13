@@ -5,9 +5,9 @@ export interface ColourOption {
 }
 
 export const colourOptions: ColourOption[] = [
-  { label: "Red", value: "red", color: "#FF0000" },
-  { label: "Green", value: "green", color: "#00FF00" },
-  { label: "Blue", value: "blue", color: "#0000FF" },
-  { label: "Yellow", value: "yellow", color: "#FFFF00" },
-  { label: "Purple", value: "purple", color: "#800080" },
+  { label: "Học tập", value: "tag 1", color: "#FF0000" },
+  { label: "Đời sống", value: "tag 2", color: "#00FF00" },
+  { label: "Giải trí", value: "tag 3", color: "#0000FF" },
+  { label: "Học phí", value: "tag 4", color: "#FFFF00" },
+  { label: "Lịch thi", value: "tag 5", color: "#800080" },
 ];

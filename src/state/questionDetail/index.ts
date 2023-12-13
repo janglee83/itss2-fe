@@ -41,6 +41,13 @@ const questionDetailSlice = createSlice({
         state.authorDetail.avatarUrl = author.avatarurl;
       },
     );
+    // .addCase(
+    //   createNewQuestion.fulfilled,
+    //   (state: IQuestionDetailState, action): void => {
+    //     // Handle success if needed
+    //     console.log("New question created:", action.payload);
+    //   },
+    // );
   },
 });
 
