@@ -16,7 +16,7 @@ import { colourOptions } from "data/subject";
 import AntSwitch from "./antSwitch";
 import { useDispatch } from "react-redux";
 import { createNewQuestion } from "state/questionDetail/reducers";
-import { AppDispatch } from "state/store";
+import { type AppDispatch } from "state/store";
 
 const animatedComponents = makeAnimated();
 
@@ -41,7 +41,7 @@ const CreatePostDialog: FunctionComponent<CreatePostDialogProps> = ({
     setAnonymous(!anonymous);
   };
 
-  const handleSubmit = (): void => {
+  const handleSubmit = async (): Promise<void> => {
     const payload = {
       title: "title",
       content: "content",
@@ -49,9 +49,12 @@ const CreatePostDialog: FunctionComponent<CreatePostDialogProps> = ({
       is_anonymous: 0,
       user_id: 99,
     };
-    dispatch(createNewQuestion(payload)).then(() => {
-      handleClose();
-    });
+    try {
+      const result = await dispatch(createNewQuestion(payload));
+      console.log(result);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -117,7 +120,9 @@ const CreatePostDialog: FunctionComponent<CreatePostDialogProps> = ({
           Huỷ bỏ
         </Button>
         <Button
-          onClick={() => handleSubmit()}
+          onClick={() => {
+            handleSubmit();
+          }}
           className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4  w-40 rounded-3xl"
         >
           Đăng

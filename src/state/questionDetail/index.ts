@@ -7,48 +7,47 @@ const questionDetailSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: (builder) => {
-    builder
-      .addCase(
-        fetchQuestionDetail.fulfilled,
-        (state: IQuestionDetailState, action): void => {
-          const { payload } = action;
-          const {
-            id,
-            title,
-            content,
-            // isanonymous,
-            viewcount,
-            likecount,
-            // acceptedanswerid,
-            createdat,
-            updatedat,
-            author,
-            // tags,
-            // answers,
-          } = payload;
+    builder.addCase(
+      fetchQuestionDetail.fulfilled,
+      (state: IQuestionDetailState, action): void => {
+        const { payload } = action;
+        const {
+          id,
+          title,
+          content,
+          // isanonymous,
+          viewcount,
+          likecount,
+          // acceptedanswerid,
+          createdat,
+          updatedat,
+          author,
+          // tags,
+          // answers,
+        } = payload;
 
-          state.id = id;
-          state.title = title;
-          state.content = content;
-          state.viewCount = viewcount;
-          state.likeCount = likecount;
-          state.createAt = createdat;
-          state.updateAt = updatedat;
+        state.id = id;
+        state.title = title;
+        state.content = content;
+        state.viewCount = viewcount;
+        state.likeCount = likecount;
+        state.createAt = createdat;
+        state.updateAt = updatedat;
 
-          // author
-          state.authorDetail.id = author.id;
-          state.authorDetail.fullName = author.fullname;
-          state.authorDetail.email = author.email;
-          state.authorDetail.avatarUrl = author.avatarurl;
-        },
-      )
-      .addCase(
-        createNewQuestion.fulfilled,
-        (state: IQuestionDetailState, action): void => {
-          // Handle success if needed
-          console.log("New question created:", action.payload);
-        },
-      );
+        // author
+        state.authorDetail.id = author.id;
+        state.authorDetail.fullName = author.fullname;
+        state.authorDetail.email = author.email;
+        state.authorDetail.avatarUrl = author.avatarurl;
+      },
+    );
+    // .addCase(
+    //   createNewQuestion.fulfilled,
+    //   (state: IQuestionDetailState, action): void => {
+    //     // Handle success if needed
+    //     console.log("New question created:", action.payload);
+    //   },
+    // );
   },
 });
 
