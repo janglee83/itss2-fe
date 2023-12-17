@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/explicit-function-return-type */
 // apiHelper.ts
 import axios, { type AxiosInstance } from "axios";
 
@@ -10,12 +11,12 @@ const apiHelper: AxiosInstance = axios.create({
   },
 });
 
-export const createQuestion = async (data: unknown): Promise<unknown> => {
+export const createQuestion = async (data: unknown) => {
   const response = await apiHelper.post("/question/create", data);
   return response.data;
 };
 
-export const questionDetail = async (questionId: number): Promise<unknown> => {
+export const questionDetail = async (questionId: number) => {
   const response = await apiHelper.get(`/question/${questionId}`);
   return response.data;
 };
