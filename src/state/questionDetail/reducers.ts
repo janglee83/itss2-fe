@@ -1,5 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { createQuestion, questionDetail } from "@/utils/axiosHelper";
+import { createQuestion, questionDetail } from "utils/axiosHelper";
 
 export const fetchQuestionDetail = createAsyncThunk(
   "questionDetail/fetch",

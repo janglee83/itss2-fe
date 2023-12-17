@@ -1,8 +1,9 @@
+import { type ITagDetail } from "@/state/questionDetail/state";
 import { type RootState } from "@/state/store";
 import HeartSvg from "assets/svg/question/HeartSvg";
 import StarSvg from "assets/svg/question/StarSvg";
 import UserAvatar from "assets/svg/question/UserAvatar";
-import { type FunctionComponent } from "react";
+import { type ReactNode, type FunctionComponent } from "react";
 import { useSelector } from "react-redux";
 
 const QuestionContent: FunctionComponent = () => {
@@ -34,21 +35,21 @@ const QuestionContent: FunctionComponent = () => {
           {questionDetailState.content}
         </p>
         <div className="flex gap-[8px] mb-[10px]">
-          <div className="text-xs text-dust-red-6">
-            <div className="rounded-sm bg-dust-red-1 flex flex-row items-center justify-start py-px px-2 gap-[3px] border-[1px] border-solid border-dust-red-3">
-              <div className="relative leading-[20px]">Sự nghiệp</div>
-            </div>
-          </div>
-          <div className="text-xs text-dust-red-6">
-            <div className="rounded-sm bg-dust-red-1 flex flex-row items-center justify-start py-px px-2 gap-[3px] border-[1px] border-solid border-dust-red-3">
-              <div className="relative leading-[20px]">Sự nghiệp</div>
-            </div>
-          </div>
-          <div className="text-xs text-dust-red-6">
-            <div className="rounded-sm bg-dust-red-1 flex flex-row items-center justify-start py-px px-2 gap-[3px] border-[1px] border-solid border-dust-red-3">
-              <div className="relative leading-[20px]">Sự nghiệp</div>
-            </div>
-          </div>
+          {questionDetailState.tagsDetail.map((tag: ITagDetail): ReactNode => {
+            return (
+              <div
+                className="text-xs"
+                style={{ backgroundColor: tag.color }}
+                key={tag.id}
+              >
+                <div className="rounded-sm flex flex-row items-center justify-start py-px px-2 gap-[3px] border-[1px] border-solid">
+                  <div className="relative leading-[20px] text-white">
+                    {tag.tagName}
+                  </div>
+                </div>
+              </div>
+            );
+          })}
         </div>
         <div className="relative w-12 text-sm text-character-secondary-45 flex items-center gap-[8px]">
           <HeartSvg className="cursor-pointer" />

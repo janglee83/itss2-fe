@@ -5,19 +5,20 @@ interface IAuthorDetail {
   avatarUrl: string;
 }
 
-interface ITagDetail {
+export interface ITagDetail {
   id: number;
   tagName: string;
   color: string;
 }
 
-interface IAnswerDetail {
+export interface IAnswerDetail {
   id: number;
   content: string;
   likeCount: number;
   questionId: number;
   authorDetail: IAuthorDetail;
   createAt: string;
+  diem_danh_gia: number;
 }
 
 export interface IQuestionDetailState {
@@ -67,6 +68,7 @@ export const initialState: IQuestionDetailState = {
         avatarUrl: "",
       },
       createAt: "",
+      diem_danh_gia: 0,
     },
   ],
 };
