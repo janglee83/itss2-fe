@@ -1,11 +1,22 @@
-import { useState, type FunctionComponent } from "react";
+import { useState, type FunctionComponent, useEffect } from "react";
 import QuestionTitle from "./QuestionTitle";
 import QuestionContent from "./QuestionContent";
 import SingleCommentSvg from "assets/svg/question/SingleCommentSvg";
 import QuestionAnswer from "./QuestionAnswer";
+import { useDispatch } from "react-redux";
+import { type AppDispatch } from "state/store";
+import { fetchQuestionDetail } from "state/questionDetail/reducers";
 
 const QuestionDetail: FunctionComponent = () => {
   const [renderCount, setRenderCount] = useState<number>(0);
+  const dispatch = useDispatch<AppDispatch>();
+
+  useEffect(() => {
+    const questionId = 1;
+    dispatch(fetchQuestionDetail(questionId)).catch((error) => {
+      console.log(error);
+    });
+  }, [dispatch]);
 
   const handleRenderCount = (): void => {
     setRenderCount((prevCount: number) => prevCount + 1);

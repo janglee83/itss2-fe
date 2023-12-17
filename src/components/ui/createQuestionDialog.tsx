@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-floating-promises */
 import React, { type FunctionComponent } from "react";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
@@ -14,6 +15,9 @@ import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import { colourOptions } from "data/subject";
 import AntSwitch from "./antSwitch";
+import { useDispatch } from "react-redux";
+import { createNewQuestion } from "state/questionDetail/reducers";
+import { type AppDispatch } from "state/store";
 
 const animatedComponents = makeAnimated();
 
@@ -28,6 +32,7 @@ const CreatePostDialog: FunctionComponent<CreatePostDialogProps> = ({
 }) => {
   const [anonymous, setAnonymous] = React.useState(false);
   const [editorContent, setEditorContent] = React.useState("");
+  const dispatch = useDispatch<AppDispatch>();
 
   const handleEditorChange = (content: string): void => {
     setEditorContent(content);
@@ -35,6 +40,22 @@ const CreatePostDialog: FunctionComponent<CreatePostDialogProps> = ({
 
   const handleAnonymousToggle = (): void => {
     setAnonymous(!anonymous);
+  };
+
+  const handleSubmit = async (): Promise<void> => {
+    const payload = {
+      title: "title",
+      content: "content",
+      tags: ["tag 1", "tag 2"],
+      is_anonymous: 0,
+      user_id: 99,
+    };
+    try {
+      const result = await dispatch(createNewQuestion(payload));
+      console.log(result);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -100,7 +121,9 @@ const CreatePostDialog: FunctionComponent<CreatePostDialogProps> = ({
           Huỷ bỏ
         </Button>
         <Button
-          onClick={handleClose}
+          onClick={() => {
+            handleSubmit();
+          }}
           className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4  w-40 rounded-3xl"
         >
           Đăng
