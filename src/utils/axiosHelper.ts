@@ -2,7 +2,7 @@
 // apiHelper.ts
 import axios, { type AxiosInstance } from "axios";
 
-const baseURL = "http://4.193.172.80";
+const baseURL = "https://unixp.h4ck.me";
 
 const apiHelper: AxiosInstance = axios.create({
   baseURL,

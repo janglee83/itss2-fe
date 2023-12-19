@@ -31,11 +31,11 @@ const CreatePostAnsWerDialog: FunctionComponent<
 
   return (
     <Dialog maxWidth="md" fullWidth open={open} onClose={handleClose}>
-      <DialogTitle className="text-2xl font-bold text-black">
+      <DialogTitle className="text-4xl font-extrabold text-black">
         Viết câu trả lời
       </DialogTitle>
       <DialogContent>
-        <DialogContentText className="text-base font-semibold text-black my-5">
+        <DialogContentText className="text-2xl font-semibold text-black my-5">
           Đăng với chế độ ẩn danh
         </DialogContentText>
         <FormControlLabel
