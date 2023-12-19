@@ -1,7 +1,10 @@
+import NotificationSvg from "assets/svg/headers/NotificationSvg";
 import HomeSvg from "assets/svg/headers/HomeSvg";
 import LogoSvg from "assets/svg/headers/LogoSvg";
 import SearchSvg from "assets/svg/headers/SearchSvg";
 import { type FunctionComponent } from "react";
+import UserAvatar from "assets/svg/question/UserAvatar";
+import ArrowDownSvg from "assets/svg/headers/ArrowDownSvg";
 
 const NavbarComponent: FunctionComponent = () => {
   return (
@@ -33,12 +36,16 @@ const NavbarComponent: FunctionComponent = () => {
       </div>
       <div className="flex items-center justify-end gap-[12px] text-base text-neutral-1">
         <div className="rounded-sm overflow-hidden flex items-center justify-center py-[6.4px] px-[15px] gap-[10px]">
-          <div className="bg-hitbox overflow-hidden hidden flex items-center"></div>
-          <div className="relative leading-[24px]">Login</div>
+          <div className="leading-[24px]">
+            <NotificationSvg />
+          </div>
         </div>
         <div className="rounded-sm overflow-hidden flex items-center justify-center py-[6.4px] px-[15px] gap-[10px]">
-          <div className="bg-hitbox overflow-hidden hidden flex items-center"></div>
-          <div className="relative leading-[24px]">Sign up</div>
+          <div className="leading-[24px] flex items-center gap-[8px]">
+            <UserAvatar />
+            <div>Nguyen Van A</div>
+            <ArrowDownSvg />
+          </div>
         </div>
       </div>
     </div>

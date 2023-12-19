@@ -44,7 +44,7 @@ const QuestionAnswer: FunctionComponent<IQuestionAnswer> = ({
         <div className="z-[2] text-sm text-character-secondary-45 flex gap-[16px]">
           <div className="flex items-center gap-[8px]">
             <HeartSvg className="cursor-pointer" />
-            <div className="relative leading-[22px]">147</div>
+            <div className="relative leading-[22px]">{answer.likeCount}</div>
           </div>
           <div className="text-accepted leading-[22px] flex items-center gap-[4px]">
             <CheckSvg />
