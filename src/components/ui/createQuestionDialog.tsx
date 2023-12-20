@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/explicit-function-return-type */
 /* eslint-disable @typescript-eslint/no-floating-promises */
 import { type FunctionComponent, useState } from "react";
 import Dialog from "@mui/material/Dialog";
@@ -36,45 +37,56 @@ const CreatePostDialog: FunctionComponent<CreatePostDialogProps> = ({
 
   const dispatch = useDispatch<AppDispatch>();
 
-  const handleEditorChange = (content: string): void => {
-    setEditorContent(content);
-  };
-
   const handleAnonymousToggle = (): void => {
     setAnonymous(!anonymous);
   };
+  const [title, setTitle] = useState("");
+  const [titleError, setTitleError] = useState("");
+  const [editorError, setEditorError] = useState("");
+  const handleEditorChange = (content: string) => {
+    setEditorContent(content);
+  };
+  const validateInputs = () => {
+    let isValid = true;
 
-  // const handleTagChange = (
-  //   selectedOptions: ColourOption[] | undefined,
-  //   { action, removedValue }: ActionMeta<ColourOption>,
-  // ): void => {
-  //   if (removedValue != null) {
-  //     if (action === "select-option") {
-  //       // If option is selected, add its value to the array
-  //       setSelectedTags([...(selectedOptions != null || []), removedValue]);
-  //     } else if (action === "deselect-option") {
-  //       // If option is deselected, remove its value from the array
-  //       setSelectedTags(
-  //         selectedOptions?.filter((tag) => tag.value !== removedValue.value) !=
-  //           null || [],
-  //       );
-  //     } else if (action === "clear") {
-  //       // If all options are cleared, reset the array
-  //       setSelectedTags([]);
-  //     }
-  //   }
-  // };
+    // Title validation
+    if (title.trim().length === 0) {
+      setTitleError("Đây là trường bắt buộc");
+      isValid = false;
+    } else if (title.length > 255) {
+      setTitleError("Vui lòng nhập tiêu đề dưới 255 ký tự");
+      isValid = false;
+    } else {
+      setTitleError("");
+    }
 
-  const handleSubmit = async (): Promise<void> => {
+    // Editor content validation
+    if (editorContent.trim().length === 0) {
+      setEditorError("Đây là trường bắt buộc");
+      isValid = false;
+    } else if (editorContent.length > 40000) {
+      setEditorError(
+        "Nội dung quá dài. Vui lòng giảm độ dài dưới 40,000 ký tự",
+      );
+      isValid = false;
+    } else {
+      setEditorError("");
+    }
+
+    return isValid;
+  };
+  const handleSubmit = async () => {
+    if (!validateInputs()) {
+      return; // Do not proceed if validation fails
+    }
+
+    const isAnonymous = anonymous ? 1 : 0;
     const inputElement = document.getElementById(
       "name",
     ) as HTMLInputElement | null;
-    const title = inputElement != null ? inputElement.value : "";
-
-    const isAnonymous = anonymous ? 1 : 0;
-
+    const questionTitle = inputElement != null ? inputElement.value : "";
     const payload = {
-      title,
+      questionTitle,
       content: editorContent,
       tags: ["tag 1", "tag 2"],
       is_anonymous: isAnonymous,
@@ -84,11 +96,11 @@ const CreatePostDialog: FunctionComponent<CreatePostDialogProps> = ({
     try {
       const result = await dispatch(createNewQuestion(payload));
       console.log(result);
+      handleClose(); // Close the dialog on successful submission
     } catch (error) {
       console.log(error);
     }
   };
-
   return (
     <Dialog maxWidth="md" fullWidth open={open} onClose={handleClose}>
       <DialogTitle className="text-4xl font-extrabold text-black mb-5">
@@ -107,6 +119,13 @@ const CreatePostDialog: FunctionComponent<CreatePostDialogProps> = ({
             fullWidth
             variant="standard"
             style={{ width: "calc(50% - 8px)" }}
+            value={title}
+            onChange={(e) => {
+              setTitle(e.target.value);
+              setTitleError(""); // Clear title error on change
+            }}
+            error={Boolean(titleError)}
+            helperText={titleError}
           />
         </Box>
         <DialogContentText className="text-2xl font-semibold text-black mb-5">
@@ -129,6 +148,7 @@ const CreatePostDialog: FunctionComponent<CreatePostDialogProps> = ({
           theme="snow"
           style={{ fontFamily: "Arial, sans-serif" }}
         />
+        {editorError}
         <DialogContentText className="text-2xl font-semibold text-black mt-20 mb-5">
           Đăng với chế độ ẩn danh
         </DialogContentText>
