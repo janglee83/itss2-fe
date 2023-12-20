@@ -1,12 +1,29 @@
 import CreatePostDialog from "components/ui/createQuestionDialog";
 import PlusSvg from "assets/svg/home/PlusSvg";
 import { useState, type FunctionComponent } from "react";
+import { type TSort } from "state/defineInterface";
+import { useDispatch } from "react-redux";
+import { type AppDispatch } from "state/store";
+import { setSort } from "state/universe";
 
-const HomeHeader: FunctionComponent = () => {
+interface IHomeHeader {
+  sort: TSort;
+}
+
+const HomeHeader: FunctionComponent<IHomeHeader> = ({ sort }) => {
   const [open, setOpen] = useState(false);
+  const dispatch = useDispatch<AppDispatch>();
 
   const handleToggle = (): void => {
     setOpen((prevOpen) => !prevOpen);
+  };
+
+  const isMetSortCondition = (string: TSort): boolean => {
+    return string === sort;
+  };
+
+  const handleChangeSortValue = (string: TSort): void => {
+    dispatch(setSort(string));
   };
 
   return (
@@ -38,19 +55,28 @@ const HomeHeader: FunctionComponent = () => {
             <div className="rounded-sm flex flex-row items-start justify-start">
               <div className="shrink-0 flex flex-row items-start justify-start">
                 <div className="shrink-0 flex flex-row items-start justify-start [transform:_rotate(180deg)]">
-                  <div className="rounded-tl-none rounded-tr-sm rounded-br-sm rounded-bl-none bg-neutral-1 overflow-hidden flex flex-row items-center justify-start [transform:_rotate(180deg)] border-[1px] border-solid border-neutral-5">
-                    <div className="shrink-0 flex flex-row items-start justify-start py-[5px] px-4 gap-[4px]">
-                      <div className="leading-[22px] z-[2]">
-                        Chưa giải quyết
-                      </div>
-                    </div>
-                  </div>
-                  <div className="bg-neutral-1 overflow-hidden flex flex-row items-center justify-start [transform:_rotate(180deg)] ml-[-1px] border-[1px] border-solid border-neutral-5">
+                  <div
+                    className={`bg-neutral-1 overflow-hidden flex flex-row items-center justify-start [transform:_rotate(180deg)] border-[1px] border-solid border-neutral-5 cursor-pointer ${
+                      isMetSortCondition("newest") &&
+                      "text-primary-6 border-primary-6 "
+                    }`}
+                    onClick={() => {
+                      handleChangeSortValue("newest");
+                    }}
+                  >
                     <div className="shrink-0 flex flex-row items-start justify-start py-[5px] px-4 gap-[4px]">
                       <div className="leading-[22px] z-[2]">Mới nhất</div>
                     </div>
                   </div>
-                  <div className="rounded-tl-sm rounded-tr-none rounded-br-none rounded-bl-sm bg-neutral-1 overflow-hidden flex flex-row items-center justify-start py-[5px] px-4 [transform:_rotate(180deg)] ml-[-1px] text-primary-6 border-[1px] border-solid border-primary-6">
+                  <div
+                    className={`rounded-tl-sm rounded-tr-none rounded-br-none rounded-bl-sm bg-neutral-1 overflow-hidden flex flex-row items-center justify-start py-[5px] px-4 [transform:_rotate(180deg)] ml-[-1px] border-[1px] border-solid  cursor-pointer ${
+                      isMetSortCondition("trending") &&
+                      "text-primary-6  border-primary-6"
+                    }`}
+                    onClick={() => {
+                      handleChangeSortValue("trending");
+                    }}
+                  >
                     <div className="leading-[22px]">Phổ biến</div>
                   </div>
                 </div>

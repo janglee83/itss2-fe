@@ -1,27 +1,32 @@
+import { type ITag } from "@/state/defineInterface";
 import { type FunctionComponent } from "react";
 
-const TagList: FunctionComponent = () => {
+interface ITagList {
+  tags: ITag[];
+}
+
+const TagList: FunctionComponent<ITagList> = ({ tags }) => {
   return (
-    <div className="rounded-lg bg-neutral-1 p-3 text-xs border-[1px] border-solid border-gray-300 w-full max-w-[150px]">
+    <div className="rounded-lg bg-neutral-1 p-3 text-xs border-[1px] border-solid border-gray-300 w-full max-w-[150px] h-full">
       <div className="self-stretch overflow-hidden">
-        <div className="h-6 overflow-hidden flex flex-col items-start justify-center">
-          Tags
-        </div>
+        <div className="h-6 flex justify-around">Tags</div>
       </div>
       <div className=" gap-[6px]">
-        <div className=" gap-[12px] flex">
-          <div className="rounded-sm bg-neutral-2  py-px px-2 gap-[3px] border-[1px] border-solid border-neutral-5">
-            <div className="relative leading-[20px]">Học tập</div>
-            <img
-              className="relative w-2.5 h-2.5 overflow-hidden shrink-0 hidden"
-              alt=""
-              src="/close.svg"
-            />
-          </div>
-          <div className=" text-sm text-character-secondary-45">
-            <div className="relative leading-[22px]">32323</div>
-          </div>
-        </div>
+        {tags.map((tag) => {
+          return (
+            <div className=" gap-[12px] flex mt-[8px]" key={tag.id}>
+              <div
+                className="rounded-sm py-px px-2 gap-[3px] border-[1px] border-solid"
+                style={{ backgroundColor: tag.color }}
+              >
+                <div className="leading-[20px] text-white">{tag.tagname}</div>
+              </div>
+              <div className=" text-sm text-character-secondary-45">
+                <div className="relative leading-[22px]">{tag.count}</div>
+              </div>
+            </div>
+          );
+        })}
       </div>
     </div>
   );
