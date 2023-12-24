@@ -16,6 +16,21 @@ const universeSlice = createSlice({
     setSort: (state: IUniverseState, action: PayloadAction<TSort>): void => {
       state.sort = action.payload;
     },
+    setAnonymous: (
+      state: IUniverseState,
+      action: PayloadAction<boolean>,
+    ): void => {
+      state.createQuestion.anonymous = action.payload;
+    },
+    setEditorContent: (
+      state: IUniverseState,
+      action: PayloadAction<string>,
+    ): void => {
+      state.createQuestion.editorContent = action.payload;
+    },
+    setTitle: (state: IUniverseState, action: PayloadAction<string>): void => {
+      state.createQuestion.title = action.payload;
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(fetchListTag.fulfilled, (state: IUniverseState, action) => {
@@ -25,6 +40,12 @@ const universeSlice = createSlice({
   },
 });
 
-export const { setIsLoading, setSort } = universeSlice.actions;
+export const {
+  setIsLoading,
+  setSort,
+  setAnonymous,
+  setEditorContent,
+  setTitle,
+} = universeSlice.actions;
 
 export default universeSlice.reducer;

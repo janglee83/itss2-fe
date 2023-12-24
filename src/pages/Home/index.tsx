@@ -5,7 +5,7 @@ import TagList from "./TagList";
 import { useDispatch, useSelector } from "react-redux";
 import { type AppDispatch, type RootState } from "@/state/store";
 import { fetchListQuestion } from "state/questionList/reducer";
-import { Backdrop, CircularProgress, Pagination } from "@mui/material";
+import { Pagination } from "@mui/material";
 import { setIsLoading } from "state/universe";
 import { fetchListTag } from "state/universe/reducer";
 
@@ -74,15 +74,6 @@ const Home: FunctionComponent = () => {
         <div className="text-left text-sm text-character-primary-85 font-footnote-description">
           <div className="flex gap-[45px]">
             <div className="text-xs text-button-primary w-full">
-              <Backdrop
-                sx={{
-                  color: "#fff",
-                  zIndex: (theme) => theme.zIndex.drawer + 1,
-                }}
-                open={universe.isLoading}
-              >
-                <CircularProgress color="inherit" />
-              </Backdrop>
               {renderQuestionPreview()}
               <div className="flex justify-center mt-4">
                 <Pagination

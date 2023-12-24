@@ -38,9 +38,10 @@ const QuestionAnswer: FunctionComponent<IQuestionAnswer> = ({
             </div>
           </div>
         </div>
-        <div className="z-[1] text-character-title-85 leading-[24px] my-[16px]">
-          {answer.content}
-        </div>
+        <div
+          className="z-[1] text-character-title-85 leading-[24px] my-[16px]"
+          dangerouslySetInnerHTML={{ __html: answer.content }}
+        ></div>
         <div className="z-[2] text-sm text-character-secondary-45 flex gap-[16px]">
           <div className="flex items-center gap-[8px]">
             <HeartSvg className="cursor-pointer" />

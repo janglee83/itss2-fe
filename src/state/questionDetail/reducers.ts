@@ -1,5 +1,9 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { createQuestion, questionDetail } from "utils/axiosHelper";
+import {
+  createAnswer,
+  createQuestion,
+  questionDetail,
+} from "utils/axiosHelper";
 
 export const fetchQuestionDetail = createAsyncThunk(
   "questionDetail/fetch",
@@ -17,6 +21,18 @@ export const createNewQuestion = createAsyncThunk(
   async (payload: unknown, { rejectWithValue }) => {
     try {
       const response = await createQuestion(payload);
+      console.log(response);
+    } catch (error) {
+      return rejectWithValue((error as Error).message);
+    }
+  },
+);
+
+export const createNewAnswer = createAsyncThunk(
+  "questionDetail/createQuestionDetail",
+  async (payload: unknown, { rejectWithValue }) => {
+    try {
+      const response = await createAnswer(payload);
       console.log(response);
     } catch (error) {
       return rejectWithValue((error as Error).message);

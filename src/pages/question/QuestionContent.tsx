@@ -31,9 +31,10 @@ const QuestionContent: FunctionComponent = () => {
             {questionDetailState.viewCount}
           </div>
         </div>
-        <p className="overflow-hidden text-character-title-85 font-text-sm-text-sm leading-[24px] m-0 my-[16px]">
-          {questionDetailState.content}
-        </p>
+        <p
+          className="overflow-hidden text-character-title-85 font-text-sm-text-sm leading-[24px] m-0 my-[16px]"
+          dangerouslySetInnerHTML={{ __html: questionDetailState.content }}
+        ></p>
         <div className="flex gap-[8px] mb-[10px]">
           {questionDetailState.tagsDetail.map((tag: ITagDetail): ReactNode => {
             return (
