@@ -9,9 +9,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { type RootState, type AppDispatch } from "state/store";
 import { fetchQuestionDetail } from "state/questionDetail/reducers";
 import { type IAnswerDetail } from "@/state/questionDetail/state";
-import CreatePostAnsWerDialog from "components/ui/CreateAnswerDialog";
 import { useParams } from "react-router-dom";
 import { setIsLoading } from "state/universe";
+import CreateAnswerDialog from "components/ui/CreateAnswerDialog";
 
 const QuestionDetail: FunctionComponent = () => {
   const [renderCount, setRenderCount] = useState<number>(0);
@@ -75,7 +75,7 @@ const QuestionDetail: FunctionComponent = () => {
           <div>{renderQuestionAnswer()}</div>
         </div>
       </div>
-      <CreatePostAnsWerDialog
+      <CreateAnswerDialog
         open={isOpen}
         handleClose={handleToggle}
         questionId={questionId}

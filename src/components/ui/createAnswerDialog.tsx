@@ -19,7 +19,7 @@ import { setIsLoading } from "state/universe";
 import { createNewAnswer } from "state/questionDetail/reducers";
 import { useNavigate } from "react-router-dom";
 
-interface CreatePostAnsWerDialogProps {
+interface ICreateAnswerDialog {
   open: boolean;
   handleClose: () => void;
   questionId?: string | undefined;
@@ -45,9 +45,12 @@ const validateRule = (): Yup.ObjectSchema<
   });
 };
 
-const CreatePostAnsWerDialog: FunctionComponent<
-  CreatePostAnsWerDialogProps
-> = ({ open, handleClose, questionId, ...other }) => {
+const CreateAnswerDialog: FunctionComponent<ICreateAnswerDialog> = ({
+  open,
+  handleClose,
+  questionId,
+  ...other
+}) => {
   const dispatch = useDispatch<AppDispatch>();
   const createAnswer = useSelector(
     (state: RootState) => state.universe.createAnswer,
@@ -162,4 +165,4 @@ const CreatePostAnsWerDialog: FunctionComponent<
   );
 };
 
-export default CreatePostAnsWerDialog;
+export default CreateAnswerDialog;
