@@ -2,13 +2,14 @@ import LikeSvg from "assets/svg/home/LikeSvg";
 import SingleCommentSvg from "assets/svg/question/SingleCommentSvg";
 import EyeSvg from "assets/svg/question/EyeSvg";
 import UserAvatar from "assets/svg/question/UserAvatar";
-import { useState, type FunctionComponent } from "react";
+import { useState, type FunctionComponent, startTransition } from "react";
 import {
   type ITag,
   type IAuthor,
   type IQuestion,
 } from "state/questionList/state";
 import getRelativeTime from "utils/helper";
+import { useNavigate } from "react-router-dom";
 
 interface IQuestionPreview {
   question: IQuestion;
@@ -17,6 +18,7 @@ interface IQuestionPreview {
 const QuestionPreview: FunctionComponent<IQuestionPreview> = ({ question }) => {
   const [author] = useState<IAuthor>(question.author);
   const [tags] = useState<ITag[]>(question.tags);
+  const navigate = useNavigate();
 
   const renderTagComponent = (): JSX.Element[] => {
     return tags.map((tag: ITag) => {
@@ -32,8 +34,19 @@ const QuestionPreview: FunctionComponent<IQuestionPreview> = ({ question }) => {
     });
   };
 
+  const handleRedict = (questionId: number): void => {
+    startTransition(() => {
+      navigate(`/question/detail/${questionId}`);
+    });
+  };
+
   return (
-    <div className=" bg-neutral-1 py-2.5 px-[23px] border-[1px] border-solid border-gray-100 flex gap-[18px] mt-[10px]">
+    <div
+      className=" bg-neutral-1 py-2.5 px-[23px] border-[1px] border-solid border-gray-100 flex gap-[18px] mt-[10px] cursor-pointer"
+      onClick={() => {
+        handleRedict(question.id);
+      }}
+    >
       <div className="rounded-81xl w-20 h-20 flex flex-col items-end justify-start">
         <div className="self-stretch flex-1 flex flex-row items-center justify-center">
           <UserAvatar />

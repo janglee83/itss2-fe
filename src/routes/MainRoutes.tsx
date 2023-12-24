@@ -23,7 +23,7 @@ export const MainRoutes = createBrowserRouter([
         children: [],
       },
       {
-        path: "detail",
+        path: "detail/:questionId",
         element: <QuestionDetailPage />,
         children: [],
       },

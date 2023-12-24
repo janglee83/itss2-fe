@@ -17,6 +17,11 @@ export const createQuestion = async (data: unknown) => {
   return response.data;
 };
 
+export const createAnswer = async (data: unknown) => {
+  const response = await apiHelper.post("/answer", data);
+  return response.data;
+};
+
 export const questionDetail = async (questionId: number) => {
   const response = await apiHelper.get(`/question/${questionId}`);
   return response.data;

@@ -1,3 +1,5 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { useState, type FunctionComponent, useEffect } from "react";
 import QuestionTitle from "./QuestionTitle";
 import QuestionContent from "./QuestionContent";
@@ -7,7 +9,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { type RootState, type AppDispatch } from "state/store";
 import { fetchQuestionDetail } from "state/questionDetail/reducers";
 import { type IAnswerDetail } from "@/state/questionDetail/state";
-import CreatePostAnsWerDialog from "components/ui/createAnswerDialog";
+import CreatePostAnsWerDialog from "components/ui/CreateAnswerDialog";
+import { useParams } from "react-router-dom";
+import { setIsLoading } from "state/universe";
 
 const QuestionDetail: FunctionComponent = () => {
   const [renderCount, setRenderCount] = useState<number>(0);
@@ -16,15 +20,22 @@ const QuestionDetail: FunctionComponent = () => {
     (state: RootState) => state.questionDetail,
   );
   const [isOpen, setIsOpen] = useState<boolean>(false);
+  const { questionId } = useParams<{ questionId?: string }>();
 
   const handleToggle = (): void => {
     setIsOpen(!isOpen);
   };
   useEffect(() => {
-    const questionId = 1;
-    dispatch(fetchQuestionDetail(questionId)).catch((error) => {
-      console.log(error);
-    });
+    let id = -1;
+    if (questionId != null) id = parseInt(questionId);
+    dispatch(setIsLoading(true));
+    dispatch(fetchQuestionDetail(id))
+      .catch((error) => {
+        console.log(error);
+      })
+      .finally(() => {
+        dispatch(setIsLoading(false));
+      });
   }, [dispatch]);
 
   const handleRenderCount = (): void => {
@@ -64,7 +75,11 @@ const QuestionDetail: FunctionComponent = () => {
           <div>{renderQuestionAnswer()}</div>
         </div>
       </div>
-      <CreatePostAnsWerDialog open={isOpen} handleClose={handleToggle} />
+      <CreatePostAnsWerDialog
+        open={isOpen}
+        handleClose={handleToggle}
+        questionId={questionId}
+      />
     </>
   );
 };

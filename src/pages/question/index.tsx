@@ -1,6 +1,6 @@
 import { type FunctionComponent, useState } from "react";
 import Button from "@mui/material/Button";
-import CreatePostAnsWerDialog from "components/ui/createAnswerDialog";
+import CreatePostAnsWerDialog from "components/ui/CreateAnswerDialog";
 
 const Question: FunctionComponent = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
