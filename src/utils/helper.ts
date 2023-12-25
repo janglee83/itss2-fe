@@ -7,10 +7,10 @@ const getRelativeTime = (dateString: string): string => {
   const differenceInDays: number = differenceInTime / (1000 * 3600 * 24);
 
   if (differenceInDays < 1) {
-    return "today";
+    return "hôm nay";
   } else {
     const daysAgo: string = Math.floor(differenceInDays).toString();
-    return `${daysAgo} days ago`;
+    return `${daysAgo} ngày trước`;
   }
 };
 

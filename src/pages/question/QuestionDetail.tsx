@@ -62,7 +62,7 @@ const QuestionDetail: FunctionComponent = () => {
             className="rounded bg-primary-6 shadow-[0px_2px_0px_rgba(0,_0,_0,_0.04)] overflow-hidden flex flex-row items-center justify-center py-1 px-[15px] gap-[8px] text-center text-sm text-character-primaryinverse border-[1px] border-solid border-primary-6 max-w-[150px] my-[10px]"
             onClick={handleToggle}
           >
-            <div className="bg-hitbox overflow-hidden flex flex-col items-center justify-center">
+            <div className="overflow-hidden flex flex-col items-center justify-center">
               <SingleCommentSvg />
             </div>
             <div className="relative leading-[22px] text-white">
