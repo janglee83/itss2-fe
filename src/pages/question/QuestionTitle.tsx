@@ -3,6 +3,7 @@ import CommentSvg from "assets/svg/question/DoubleCommentSvg";
 import EyeSvg from "assets/svg/question/EyeSvg";
 import { type FunctionComponent } from "react";
 import { useSelector } from "react-redux";
+import getRelativeTime from "utils/helper";
 
 const QuestionTitle: FunctionComponent = () => {
   const questionDetailState = useSelector(
@@ -33,12 +34,13 @@ const QuestionTitle: FunctionComponent = () => {
           <div className="flex flex-row items-center justify-start gap-[16px] text-sm text-gray-300 font-text-sm-text-sm">
             <div className="flex flex-col items-start justify-start">
               <div className="relative leading-[20px]">
-                Đã đăng vào {questionDetailState.createAt}
+                Đã đăng vào {getRelativeTime(questionDetailState.createAt)}
               </div>
             </div>
             <div className="flex flex-col items-start justify-start">
               <div className="relative leading-[20px]">
-                Chỉnh sửa lần cuối vào {questionDetailState.updateAt}
+                Chỉnh sửa lần cuối vào{" "}
+                {getRelativeTime(questionDetailState.updateAt)}
               </div>
             </div>
           </div>
