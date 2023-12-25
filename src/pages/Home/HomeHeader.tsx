@@ -1,4 +1,4 @@
-import CreatePostDialog from "components/ui/CreateQuestionDialog";
+import CreatePostDialog from "components/ui/createQuestionDialog";
 import PlusSvg from "assets/svg/home/PlusSvg";
 import { useState, type FunctionComponent } from "react";
 import { type TSort } from "state/defineInterface";
