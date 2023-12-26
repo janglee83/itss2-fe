@@ -7,13 +7,21 @@ import UserAvatar from "assets/svg/question/UserAvatar";
 import ArrowDownSvg from "assets/svg/headers/ArrowDownSvg";
 import Notification from "components/ui/notification";
 import { useNavigate } from "react-router-dom";
+import DropdownMenu from "components/ui/dropdownMenu";
 
 const NavbarComponent: FunctionComponent = () => {
   const [isExpanded, setIsExpanded] = useState<boolean>(false);
+  const [isExpandedDropdownMenu, setIsExpandedDropdownMenu] =
+    useState<boolean>(false);
+
   const navigate = useNavigate();
 
   const handleShowNoti = (): void => {
     setIsExpanded(!isExpanded);
+  };
+
+  const handleShowDropdownMenu = (): void => {
+    setIsExpandedDropdownMenu(!isExpandedDropdownMenu);
   };
 
   const handleRedirectToHome = (): void => {
@@ -64,12 +72,18 @@ const NavbarComponent: FunctionComponent = () => {
             {isExpanded && <Notification />}
           </div>
         </div>
-        <div className="rounded-sm overflow-hidden flex items-center justify-center py-[6.4px] px-[15px] gap-[10px]">
+        <div
+          className="rounded-sm overflow-hidden flex items-center justify-center py-[6.4px] px-[15px] gap-[10px] cursor-pointer"
+          onClick={() => {
+            handleShowDropdownMenu();
+          }}
+        >
           <div className="leading-[24px] flex items-center gap-[8px]">
             <UserAvatar />
             <div>Nguyen Van A</div>
             <ArrowDownSvg />
           </div>
+          {isExpandedDropdownMenu && <DropdownMenu />}
         </div>
       </div>
     </div>
