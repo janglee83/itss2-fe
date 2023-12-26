@@ -60,3 +60,11 @@ export const getListMessage = async () => {
 
   return response.data;
 };
+
+export const likeComment = async (answerId: number) => {
+  const response = await apiHelper.put(`/answer/${answerId}/like`, {
+    userId: 1,
+  });
+
+  return response.data;
+};
