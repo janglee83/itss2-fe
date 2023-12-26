@@ -5,11 +5,17 @@ import SearchSvg from "assets/svg/headers/SearchSvg";
 import { useState, type FunctionComponent } from "react";
 import UserAvatar from "assets/svg/question/UserAvatar";
 import ArrowDownSvg from "assets/svg/headers/ArrowDownSvg";
+// import { useNavigate } from "react-router-dom";
 
 const NavbarComponent: FunctionComponent = () => {
   const [searchQuery, setSearchQuery] = useState("");
+  // const navigate = useNavigate();
   const handleSearchClick = (): void => {
-    // history.push(`/search?query=${encodeURIComponent(searchQuery)}`);
+    // if (searchQuery.trim() !== "") {
+    //   startTransition(() => {
+    //     navigate(`/search/${encodeURIComponent(searchQuery)}`);
+    //   });
+    // }
   };
   return (
     <div className="bg-bg-black shadow-[0px_4px_4px_rgba(0,_0,_0,_0.25)] w-full h-20 overflow-hidden flex items-center justify-between py-3 px-6 text-xl text-neutral-13">

@@ -31,7 +31,7 @@ export const MainRoutes = createBrowserRouter([
     ],
   },
   {
-    path: "search",
+    path: "search/:searchQuery",
     element: <Search />,
   },
 ]);
