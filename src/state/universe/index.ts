@@ -1,6 +1,6 @@
 import { type PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { type IUniverseState, initialState } from "./state";
-import { fetchListTag } from "./reducer";
+import { fetchListMessages, fetchListTag } from "./reducer";
 import { type TSort } from "../defineInterface";
 
 const universeSlice = createSlice({
@@ -33,10 +33,15 @@ const universeSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    builder.addCase(fetchListTag.fulfilled, (state: IUniverseState, action) => {
-      const { payload } = action;
-      state.tags = payload;
-    });
+    builder
+      .addCase(fetchListTag.fulfilled, (state: IUniverseState, action) => {
+        const { payload } = action;
+        state.tags = payload;
+      })
+      .addCase(fetchListMessages.fulfilled, (state: IUniverseState, action) => {
+        const { payload } = action;
+        state.listMessage = payload.data.data;
+      });
   },
 });
 

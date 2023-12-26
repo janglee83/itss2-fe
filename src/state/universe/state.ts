@@ -11,12 +11,24 @@ export interface ICreateAnswer {
   editorContent: string;
 }
 
+export interface IMessageState {
+  id: number;
+  senderid: number;
+  recipientid: number;
+  relatedid: number;
+  url: string | null;
+  content: string;
+  hasread: number;
+  createdat: string;
+}
+
 export interface IUniverseState {
   isLoading: boolean;
   sort: TSort;
   tags: ITag[];
   createQuestion: ICreateQuestion;
   createAnswer: ICreateAnswer;
+  listMessage: IMessageState[];
 }
 
 export const initialState: IUniverseState = {
@@ -31,6 +43,18 @@ export const initialState: IUniverseState = {
     anonymous: false,
     editorContent: "",
   },
+  listMessage: [
+    {
+      id: 0,
+      senderid: 0,
+      recipientid: 0,
+      relatedid: 0,
+      url: null,
+      content: "",
+      hasread: 0,
+      createdat: "",
+    },
+  ],
   tags: [
     {
       id: 0,

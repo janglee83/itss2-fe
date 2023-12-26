@@ -54,3 +54,9 @@ export const acceptAnswerApi = async (answerId: number, data: unknown) => {
   );
   return response.data;
 };
+
+export const getListMessage = async () => {
+  const response = await apiHelper.get("/user/1/notifications?page=1");
+
+  return response.data;
+};
