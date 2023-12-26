@@ -5,7 +5,7 @@ import { createBrowserRouter } from "react-router-dom";
 const HomePage = lazy(async () => await import("pages/Home"));
 const QuestionPage = lazy(async () => await import("pages/question/index"));
 const QuestionDetailPage = lazy(
-  async () => await import("pages/question/QuestionDetail")
+  async () => await import("pages/question/QuestionDetail"),
 );
 const Search = lazy(async () => await import("pages/search/index"));
 

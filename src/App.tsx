@@ -26,11 +26,13 @@ export default function App(): JSX.Element {
       </Backdrop>
       <CssBaseline />
       {/* <Provider> */}
-      <div id="container" style={{minHeight:'100vh',paddingBottom:'35px'}}>
+      <div id="container" style={{ minHeight: "100vh", paddingBottom: "35px" }}>
         <NavbarComponent />
         <Routes />
       </div>
-      <div id="footer" style={{marginTop:'-35px'}}><FooterComponent /></div>
+      <div id="footer" style={{ marginTop: "-35px" }}>
+        <FooterComponent />
+      </div>
       {/* </Provider> */}
     </StyledEngineProvider>
   );

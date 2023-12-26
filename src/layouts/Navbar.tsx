@@ -2,11 +2,15 @@ import NotificationSvg from "assets/svg/headers/NotificationSvg";
 import HomeSvg from "assets/svg/headers/HomeSvg";
 import LogoSvg from "assets/svg/headers/LogoSvg";
 import SearchSvg from "assets/svg/headers/SearchSvg";
-import { type FunctionComponent } from "react";
+import { useState, type FunctionComponent } from "react";
 import UserAvatar from "assets/svg/question/UserAvatar";
 import ArrowDownSvg from "assets/svg/headers/ArrowDownSvg";
 
 const NavbarComponent: FunctionComponent = () => {
+  const [searchQuery, setSearchQuery] = useState("");
+  const handleSearchClick = (): void => {
+    // history.push(`/search?query=${encodeURIComponent(searchQuery)}`);
+  };
   return (
     <div className="bg-bg-black shadow-[0px_4px_4px_rgba(0,_0,_0,_0.25)] w-full h-20 overflow-hidden flex items-center justify-between py-3 px-6 text-xl text-neutral-13">
       <div className="flex items-center gap-[32px]">
@@ -18,11 +22,21 @@ const NavbarComponent: FunctionComponent = () => {
         <LogoSvg />
         <div className="rounded bg-neutral-1 box-border flex items-center text-left text-sm text-character-disabled-placeholder-25 border-[1px] border-solid border-neutral-5">
           <div className="flex-1 overflow-hidden py-2 px-3">
-            <div className="relative leading-[22px]">Tìm kiếm câu hỏi</div>
+            <input
+              type="text"
+              value={searchQuery}
+              onChange={(e) => {
+                setSearchQuery(e.target.value);
+              }}
+              placeholder="Tìm kiếm câu hỏi"
+              className="relative leading-[22px] w-full"
+            />
           </div>
-          <div className="self-stretch rounded-tl-none rounded-tr rounded-br rounded-bl-none bg-primary-6 shadow-[0px_2px_0px_rgba(0,_0,_0,_0.04)] overflow-hidden flex items-center justify-center py-0 px-4 gap-[8px] text-center text-neutral-1 border-[1px] border-solid border-primary-6">
+          <div
+            className="self-stretch rounded-tl-none rounded-tr rounded-br rounded-bl-none bg-primary-6 shadow-[0px_2px_0px_rgba(0,_0,_0,_0.04)] overflow-hidden flex items-center justify-center py-0 px-4 gap-[8px] text-center text-neutral-1 border-[1px] border-solid border-primary-6"
+            onClick={handleSearchClick}
+          >
             <SearchSvg />
-            <div className="relative leading-[22px] hidden">Button Title</div>
           </div>
         </div>
         <div className="rounded-sm overflow-hidden flex items-center justify-center py-[6.4px] px-[15px] gap-[10px] text-base text-neutral-1">

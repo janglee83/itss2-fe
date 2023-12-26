@@ -7,7 +7,8 @@ const FilterSvg: FunctionComponent = () => {
       height="36"
       viewBox="0 0 37 36"
       fill="none"
-      xmlns="http://www.w3.org/2000/svg">
+      xmlns="http://www.w3.org/2000/svg"
+    >
       <path
         d="M15.2865 28.0547H21.7166V22.5703H15.2865V28.0547ZM14.949 19.7367L15.283 20.3203H21.7166L22.0506 19.7367L29.0221 7.94531H7.97754L14.949 19.7367Z"
         fill="#E6F7FF"

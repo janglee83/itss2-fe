@@ -11,7 +11,7 @@ import { fetchQuestionDetail } from "state/questionDetail/reducers";
 import { type IAnswerDetail } from "@/state/questionDetail/state";
 import { useParams } from "react-router-dom";
 import { setIsLoading } from "state/universe";
-import CreateAnswerDialog from "components/ui/CreateAnswerDialog";
+import CreateAnswerDialog from "components/ui/createAnswerDialog";
 
 const QuestionDetail: FunctionComponent = () => {
   const [renderCount, setRenderCount] = useState<number>(0);
