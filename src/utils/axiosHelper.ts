@@ -43,7 +43,7 @@ export const getAllQuestionInMainPage = async ({
 };
 
 export const getAllTags = async () => {
-  const { data } = await apiHelper.get("/tag/all");
+  const { data } = await apiHelper.get("/tag/top-tags");
   return data;
 };
 

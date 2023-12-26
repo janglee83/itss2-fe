@@ -6,6 +6,7 @@ module.exports = {
       colors: {
         whitesmoke: "#f0f2f5",
         "neutral-1": "#fff",
+        "neutral-2": "#FAFAFA",
         "primary-6": "#1890ff",
         "neutral-5": "#d9d9d9",
         "character-title-85": "rgba(0, 0, 0, 0.85)",
@@ -16,6 +17,7 @@ module.exports = {
           300: "rgba(0, 0, 0, 0.2)",
         },
         "character-secondary-45": "rgba(0, 0, 0, 0.45)",
+        "character-secondary-85": "rgba(0, 0, 0, 0.85)",
         "neutral-2": "#fafafa",
         "side-bar-border": "#e0e4e8",
         "neutral-13": "#000",
@@ -57,6 +59,7 @@ module.exports = {
     fontSize: {
       sm: "14px",
       xl: "20px",
+      "3xl": "32px",
       base: "16px",
       xs: "12px",
       inherit: "inherit",
