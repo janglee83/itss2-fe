@@ -1,15 +1,15 @@
-import NotificationSvg from "assets/svg/headers/NotificationSvg";
+import ArrowDownSvg from "assets/svg/headers/ArrowDownSvg";
 import HomeSvg from "assets/svg/headers/HomeSvg";
 import LogoSvg from "assets/svg/headers/LogoSvg";
+import NotificationSvg from "assets/svg/headers/NotificationSvg";
 import SearchSvg from "assets/svg/headers/SearchSvg";
-import { useState, type FunctionComponent, useEffect } from "react";
 import UserAvatar from "assets/svg/question/UserAvatar";
-import ArrowDownSvg from "assets/svg/headers/ArrowDownSvg";
-import Notification from "components/ui/notification";
-import { useNavigate } from "react-router-dom";
 import DropdownMenu from "components/ui/dropdownMenu";
-import { type AppDispatch, type RootState } from "state/store";
+import Notification from "components/ui/notification";
+import { useEffect, useState, type FunctionComponent } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { type AppDispatch, type RootState } from "state/store";
 import { setIsLoading } from "state/universe";
 import { fetchListMessages } from "state/universe/reducer";
 
@@ -55,6 +55,16 @@ const NavbarComponent: FunctionComponent = () => {
     setNotiCount(listMessage.length);
   }, [listMessage]);
 
+  const [searchQuery, setSearchQuery] = useState("");
+  // const navigate = useNavigate();
+  const handleSearchClick = (): void => {
+    // if (searchQuery.trim() !== "") {
+    //   startTransition(() => {
+    //     navigate(`/search/${encodeURIComponent(searchQuery)}`);
+    //   });
+    // }
+  };
+
   return (
     <div className="bg-bg-black shadow-[0px_4px_4px_rgba(0,_0,_0,_0.25)] w-full h-20 overflow-hidden flex items-center justify-between py-3 px-6 text-xl text-neutral-13">
       <div className="flex items-center gap-[32px]">
@@ -64,15 +74,36 @@ const NavbarComponent: FunctionComponent = () => {
           </div>
         </div>
         <LogoSvg />
-        <div className="rounded bg-neutral-1 box-border flex items-center text-left text-sm text-character-disabled-placeholder-25 border-[1px] border-solid border-neutral-5">
+        {/* <div className="rounded bg-neutral-1 box-border flex items-center text-left text-sm text-character-disabled-placeholder-25 border-[1px] border-solid border-neutral-5">
           <div className="flex-1 overflow-hidden py-2 px-3">
-            <div className="relative leading-[22px]">
-              Tìm kiếm câu hỏi, bài viết, người dùng...
-            </div>
+            <input
+              type="text"
+              value={searchQuery}
+              onChange={(e) => {
+                setSearchQuery(e.target.value);
+              }}
+              placeholder="Tìm kiếm câu hỏi"
+              className="relative leading-[22px] w-full"
+            />
           </div>
-          <div className="self-stretch rounded-tl-none rounded-tr rounded-br rounded-bl-none bg-primary-6 shadow-[0px_2px_0px_rgba(0,_0,_0,_0.04)] overflow-hidden flex items-center justify-center py-0 px-4 gap-[8px] text-center text-neutral-1 border-[1px] border-solid border-primary-6">
+          <div className="self-stretch rounded-tl-none rounded-tr rounded-br rounded-bl-none bg-primary-6 shadow-[0px_2px_0px_rgba(0,_0,_0,_0.04)] overflow-hidden flex items-center justify-center py-0 px-4 gap-[8px] text-center text-neutral-1 border-[1px] border-solid border-primary-6"> */}
+        <div className="rounded bg-neutral-1 flex items-center text-left text-sm text-character-disabled-placeholder-25 w-[400px]">
+          <div className="flex-1 rounded overflow-hidden">
+            <input
+              type="text"
+              value={searchQuery}
+              onChange={(e) => {
+                setSearchQuery(e.target.value);
+              }}
+              placeholder="Tìm kiếm câu hỏi"
+              className="relative leading-[22px] py-2 px-3 w-full"
+            />
+          </div>
+          <div
+            className="self-stretch rounded-tl-none rounded-tr rounded-br rounded-bl-none bg-primary-6 shadow-[0px_2px_0px_rgba(0,_0,_0,_0.04)] overflow-hidden flex items-center justify-center py-0 px-4 gap-[8px] text-center text-neutral-1 cursor-pointer"
+            onClick={handleSearchClick}
+          >
             <SearchSvg />
-            <div className="relative leading-[22px] hidden">Button Title</div>
           </div>
         </div>
         <div
