@@ -23,7 +23,7 @@ const questionDetailSlice = createSlice({
           // isanonymous,
           viewcount,
           likecount,
-          // acceptedanswerid,
+          acceptedanswerid,
           createdat,
           updatedat,
           author,
@@ -60,6 +60,7 @@ const questionDetailSlice = createSlice({
         );
 
         // answer
+        state.acceptedAnswerId = acceptedanswerid;
         state.answersDetail = answers.map(
           (item: {
             id: number;

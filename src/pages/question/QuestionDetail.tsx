@@ -48,6 +48,8 @@ const QuestionDetail: FunctionComponent = () => {
         onRender={handleRenderCount}
         key={answer.id}
         answer={answer}
+        acceptedAnswerId={questionDetailState.acceptedAnswerId}
+        questionId={questionId}
       />
     ));
   };

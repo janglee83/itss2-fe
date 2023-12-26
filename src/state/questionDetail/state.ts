@@ -27,6 +27,7 @@ export interface IQuestionDetailState {
   content: string;
   viewCount: number;
   likeCount: number;
+  acceptedAnswerId: number | null;
   createAt: string;
   updateAt: string;
   authorDetail: IAuthorDetail;
@@ -42,6 +43,7 @@ export const initialState: IQuestionDetailState = {
   likeCount: 0,
   createAt: "",
   updateAt: "",
+  acceptedAnswerId: null,
   authorDetail: {
     id: 0,
     fullName: "",

@@ -46,3 +46,11 @@ export const getAllTags = async () => {
   const { data } = await apiHelper.get("/tag/all");
   return data;
 };
+
+export const acceptAnswerApi = async (answerId: number, data: unknown) => {
+  const response = await apiHelper.post(
+    `/answer/${answerId}/accept-answer`,
+    data,
+  );
+  return response.data;
+};
