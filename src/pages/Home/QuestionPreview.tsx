@@ -2,6 +2,7 @@ import LikeSvg from "assets/svg/home/LikeSvg";
 import SingleCommentSvg from "assets/svg/question/SingleCommentSvg";
 import EyeSvg from "assets/svg/question/EyeSvg";
 import UserAvatar from "assets/svg/question/UserAvatar";
+import CheckSvg from "assets/svg/question/CheckSvg";
 import { useState, type FunctionComponent, startTransition } from "react";
 import {
   type ITag,
@@ -9,6 +10,7 @@ import {
   type IQuestion,
 } from "state/questionList/state";
 import getRelativeTime from "utils/helper";
+import formatNumber from "utils/formatNumber";
 import { useNavigate } from "react-router-dom";
 
 interface IQuestionPreview {
@@ -40,22 +42,25 @@ const QuestionPreview: FunctionComponent<IQuestionPreview> = ({ question }) => {
     });
   };
 
+  console.log(formatNumber(10400));
   return (
     <div
-      className=" bg-neutral-1 py-2.5 px-[23px] border-[1px] border-solid border-gray-100 flex gap-[18px] mt-[10px] cursor-pointer"
+      className="bg-neutral-1 py-2.5 px-[23px] border-[1px] border-solid border-gray-100 rounded-lg flex gap-[18px] mb-[10px] cursor-pointer"
       onClick={() => {
         handleRedict(question.id);
       }}
     >
-      <div className="rounded-81xl w-20 h-20 flex flex-col items-end justify-start">
+      <div className="rounded-81xl flex flex-col items-end justify-start">
         <div className="self-stretch flex-1 flex flex-row items-center justify-center">
-          <UserAvatar />
+          <UserAvatar style={{ zoom: "calc(80 / 45)" }} />
         </div>
       </div>
-      <div className="flex flex-col">
-        <div className="shrink-0 flex flex-row items-center justify-start gap-[24px]">
+      <div className="flex flex-col grow">
+        <div className="shrink-0 flex flex-row items-center justify-start gap-[24px] leading-normal">
           <div className="overflow-hidden flex flex-col items-start justify-center">
-            <div className="relative">{author.fullname}</div>
+            <div className="relative">
+              {question.isanonymous > 0 ? "Ẩn danh" : author.fullname}
+            </div>
           </div>
           <div className="overflow-hidden flex flex-col items-start justify-center text-button-disabled">
             <div className="relative">
@@ -63,43 +68,54 @@ const QuestionPreview: FunctionComponent<IQuestionPreview> = ({ question }) => {
             </div>
           </div>
         </div>
-        <div className="py-1 px-0 text-xl text-character-primary-85">
+        <div className="ps-[24px] py-[4px] h-[48px] text-xl text-neutral-13 line-clamp-2">
           <div
             className="leading-[24px] font-medium"
-            dangerouslySetInnerHTML={{ __html: question.content }}
+            dangerouslySetInnerHTML={{ __html: question.title }}
           ></div>
         </div>
-        <div className="flex items-center gap-[8px] text-sm text-character-secondary-45">
+        <div className="flex justify-between items-center gap-[8px] text-sm text-character-secondary-45">
           <div className="h-[33px] flex flex-row items-center justify-start gap-[16px]">
-            <div className="flex flex-row items-center justify-start gap-[8px]">
+            <div className="flex flex-row items-center justify-start gap-[8px] fill-character-secondary-45">
               <div className="bg-hitbox overflow-hidden flex flex-col items-center justify-center">
                 <EyeSvg />
               </div>
               <div className="overflow-hidden flex flex-col items-start justify-center">
                 <div className="relative leading-[22px]">
-                  {question.viewcount}
+                  {formatNumber(question.viewcount)}
                 </div>
               </div>
             </div>
-            <div className="flex flex-row items-center justify-start gap-[8px]">
+            <div className="flex flex-row items-center justify-start gap-[8px] fill-character-secondary-45">
               <div className="bg-hitbox overflow-hidden flex flex-col items-center justify-center">
                 <LikeSvg />
               </div>
               <div className="overflow-hidden flex flex-col items-start justify-center">
                 <div className="relative leading-[22px]">
-                  {question.likecount}
+                  {formatNumber(question.likecount)}
                 </div>
               </div>
             </div>
-            <div className="flex flex-row items-center justify-start gap-[8px]">
+            <div
+              className={`flex flex-row items-center justify-start gap-[8px] ${
+                question.acceptedanswerid !== null
+                  ? "bg-accepted fill-white text-white px-[6px] py-[5px] rounded-[15px]"
+                  : "fill-character-secondary-45"
+              }`}
+            >
               <div className="bg-hitbox overflow-hidden flex flex-col items-center justify-center">
                 <SingleCommentSvg />
               </div>
               <div className="overflow-hidden flex flex-col items-start justify-center">
                 <div className="relative leading-[22px]">
-                  {question.answercount}
+                  {formatNumber(question.answercount)}
                 </div>
               </div>
+              {question.acceptedanswerid !== null && (
+                <div className="bg-hitbox overflow-hidden flex flex-col items-center justify-center">
+                  <CheckSvg />
+                </div>
+              )}
             </div>
           </div>
           <div className="bg-hitbox overflow-hidden flex flex-col items-start justify-center p-2 text-polar-green-6">

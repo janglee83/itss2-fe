@@ -35,53 +35,76 @@ const HomeHeader: FunctionComponent<IHomeHeader> = ({ sort }) => {
               <div className="overflow-hidden flex flex-col items-center justify-end text-primary-6"></div>
             </div>
           </div>
-          <div className="self-stretch flex flex-row items-center justify-between text-13xl">
-            <div className="overflow-hidden shrink-0 flex flex-row items-center justify-start">
-              <div className="leading-[24px] font-medium">Câu hỏi hàng đầu</div>
-            </div>
-            <div
-              className="shrink-0 flex flex-row items-center justify-start text-center text-xl text-neutral-1 cursor-pointer"
-              onClick={handleToggle}
-            >
-              <div className="self-stretch rounded-81xl bg-primary-6 shadow-[0px_2px_0px_rgba(0,_0,_0,_0.04)] overflow-hidden flex flex-row items-center justify-center py-[6.400000095367432px] px-[15px] gap-[10px] border-[1px] border-solid border-primary-6">
-                <div className="bg-hitbox overflow-hidden flex flex-col items-center justify-center">
-                  <PlusSvg />
+          <div className="flex gap-[24px] w-full">
+            <div className="w-full">
+              <div className="self-stretch flex flex-row items-start justify-between text-13xl">
+                <div className="overflow-hidden shrink-0 flex flex-row items-center justify-start">
+                  <div className="text-3xl leading-[36px] font-medium">
+                    Câu hỏi hàng đầu
+                  </div>
                 </div>
-                <div className="leading-[24px]">Viết câu hỏi</div>
-              </div>
-            </div>
-          </div>
-          <div className="self-stretch flex flex-col items-end justify-center text-sm">
-            <div className="rounded-sm flex flex-row items-start justify-start">
-              <div className="shrink-0 flex flex-row items-start justify-start">
-                <div className="shrink-0 flex flex-row items-start justify-start [transform:_rotate(180deg)]">
+                <div className="flex flex-col gap-[20px]">
                   <div
-                    className={`bg-neutral-1 overflow-hidden flex flex-row items-center justify-start [transform:_rotate(180deg)] border-[1px] border-solid border-neutral-5 cursor-pointer ${
-                      isMetSortCondition("newest") &&
-                      "text-primary-6 border-primary-6 "
-                    }`}
-                    onClick={() => {
-                      handleChangeSortValue("newest");
-                    }}
+                    className="shrink-0 flex flex-row items-center justify-end text-center text-xl text-neutral-1 cursor-pointer"
+                    onClick={handleToggle}
                   >
-                    <div className="shrink-0 flex flex-row items-start justify-start py-[5px] px-4 gap-[4px]">
-                      <div className="leading-[22px] z-[2]">Mới nhất</div>
+                    <div className="self-stretch rounded-81xl bg-primary-6 shadow-[0px_2px_0px_rgba(0,_0,_0,_0.04)] overflow-hidden flex flex-row items-center justify-center py-[6.400000095367432px] px-[15px] gap-[10px] border-[1px] border-solid border-primary-6">
+                      <div className="bg-hitbox overflow-hidden flex flex-col items-center justify-center">
+                        <PlusSvg />
+                      </div>
+                      <div className="leading-[24px]">Viết câu hỏi</div>
                     </div>
                   </div>
-                  <div
+
+                  <div className="self-stretch flex flex-col items-end justify-center text-sm">
+                    <div className="rounded-sm flex flex-row items-start justify-start">
+                      <div className="shrink-0 flex flex-row items-start justify-start">
+                        <div className="shrink-0 flex flex-row items-start justify-start [transform:_rotate(180deg)]">
+                          <div
+                            className={`bg-neutral-1 overflow-hidden flex flex-row items-center justify-start [transform:_rotate(180deg)] border-[1px] border-solid border-neutral-5 cursor-pointer ${
+                              isMetSortCondition("newest") &&
+                              "text-primary-6 border-primary-6 "
+                            }`}
+                            onClick={() => {
+                              handleChangeSortValue("newest");
+                            }}
+                          >
+                            <div className="shrink-0 flex flex-row items-start justify-start py-[5px] px-4 gap-[4px]">
+                              <div className="leading-[22px] z-[2]">
+                                Mới nhất
+                              </div>
+                            </div>
+                          </div>
+                          <div
+                            className={`rounded-tl-sm rounded-tr-none rounded-br-none rounded-bl-sm bg-neutral-1 overflow-hidden flex flex-row items-center justify-start py-[5px] px-4 [transform:_rotate(180deg)] ml-[-1px] border-[1px] border-solid  cursor-pointer ${
+                              isMetSortCondition("trending") &&
+                              "text-primary-6  border-primary-6"
+                            }`}
+                            onClick={() => {
+                              handleChangeSortValue("trending");
+                            }}
+                          >
+                            <div className="leading-[22px]">Phổ biến</div>
+                          </div>
+                          {/* <div
                     className={`rounded-tl-sm rounded-tr-none rounded-br-none rounded-bl-sm bg-neutral-1 overflow-hidden flex flex-row items-center justify-start py-[5px] px-4 [transform:_rotate(180deg)] ml-[-1px] border-[1px] border-solid  cursor-pointer ${
-                      isMetSortCondition("trending") &&
+                      isMetSortCondition("not-solvered") &&
                       "text-primary-6  border-primary-6"
                     }`}
                     onClick={() => {
                       handleChangeSortValue("trending");
                     }}
                   >
-                    <div className="leading-[22px]">Phổ biến</div>
+                    <div className="leading-[22px]">Chưa giải quyết</div>
+                  </div> */}
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
+            <div className="w-full max-w-[200px]"></div>
           </div>
         </div>
       </div>

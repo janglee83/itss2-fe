@@ -1,6 +1,10 @@
 import { type FunctionComponent } from "react";
 
-const UserAvatar: FunctionComponent = () => {
+interface UserAvatarProps {
+  style?: React.CSSProperties;
+}
+
+const UserAvatar: FunctionComponent<UserAvatarProps> = ({ style }) => {
   return (
     <svg
       width="45"
@@ -8,6 +12,7 @@ const UserAvatar: FunctionComponent = () => {
       viewBox="0 0 45 45"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
+      style={style}
     >
       <rect width="45" height="45" rx="22.5" fill="#FFD8BF" />
       <g clipPath="url(#clip0_801_103641)">

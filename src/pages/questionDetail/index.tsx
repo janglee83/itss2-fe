@@ -64,7 +64,7 @@ const QuestionDetail: FunctionComponent = () => {
             className="rounded bg-primary-6 shadow-[0px_2px_0px_rgba(0,_0,_0,_0.04)] overflow-hidden flex flex-row items-center justify-center py-1 px-[15px] gap-[8px] text-center text-sm text-character-primaryinverse border-[1px] border-solid border-primary-6 max-w-[150px] my-[10px]"
             onClick={handleToggle}
           >
-            <div className="overflow-hidden flex flex-col items-center justify-center">
+            <div className="overflow-hidden flex flex-col items-center justify-center fill-white">
               <SingleCommentSvg />
             </div>
             <div className="relative leading-[22px] text-white">
@@ -72,7 +72,7 @@ const QuestionDetail: FunctionComponent = () => {
             </div>
           </div>
           <div className="mx-auto leading-[24px] font-medium">
-            {renderCount} Câu trả lời
+            {questionDetailState.answersDetail.length} Câu trả lời
           </div>
           <div>{renderQuestionAnswer()}</div>
         </div>

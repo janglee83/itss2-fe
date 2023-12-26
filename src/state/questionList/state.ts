@@ -32,7 +32,8 @@ export interface IQuestion {
 
 export interface IQuestionListState {
   status: string;
-  numberOfPage: string;
+  numberOfPage: number;
+  totalPages: number;
   pageSize: string;
   sort: string;
   questions: IQuestion[];
@@ -40,7 +41,8 @@ export interface IQuestionListState {
 
 export const initialState: IQuestionListState = {
   status: "",
-  numberOfPage: "",
+  numberOfPage: 1,
+  totalPages: 1,
   pageSize: "",
   sort: "",
   questions: [

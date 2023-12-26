@@ -65,26 +65,28 @@ const Home: FunctionComponent = () => {
 
   return (
     <>
-      <div className="mt-6 max-w-[1550px] mx-auto">
+      <div className="mt-6 max-w-[1224px] mx-auto">
         <div className="overflow-hidden text-left text-sm text-character-primary-85 font-footnote-description">
           <HomeHeader sort={universe.sort} />
         </div>
       </div>
-      <div className="pt-6 px-[100px] bg-whitesmoke px-auto">
-        <div className="text-left text-sm text-character-primary-85 font-footnote-description">
-          <div className="flex gap-[45px]">
-            <div className="text-xs text-button-primary w-full">
-              {renderQuestionPreview()}
-              <div className="flex justify-center mt-4">
-                <Pagination
-                  count={20}
-                  onChange={(e, value) => {
-                    setCurrentPage(value);
-                  }}
-                />
+      <div className="bg-whitesmoke">
+        <div className="max-w-[1224px] mx-auto py-6">
+          <div className="text-left text-sm text-character-primary-85 font-footnote-description">
+            <div className="flex gap-[24px]">
+              <div className="text-xs text-button-primary w-full">
+                {renderQuestionPreview()}
+                <div className="flex justify-center mt-[32px]">
+                  <Pagination
+                    count={questionList.totalPages}
+                    onChange={(e, value) => {
+                      setCurrentPage(value);
+                    }}
+                  />
+                </div>
               </div>
+              <TagList tags={universe.tags} />
             </div>
-            <TagList tags={universe.tags} />
           </div>
         </div>
       </div>
