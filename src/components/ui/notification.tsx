@@ -1,33 +1,14 @@
-import { type RootState, type AppDispatch } from "state/store";
-import { setIsLoading } from "state/universe";
-import { fetchListMessages } from "state/universe/reducer";
+import { type RootState } from "state/store";
 import YellowNotification from "assets/svg/headers/YellowNotificationSvg";
 import UserAvatar from "assets/svg/question/UserAvatar";
-import { type FunctionComponent, useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { type FunctionComponent, useState } from "react";
+import { useSelector } from "react-redux";
 import { CSSTransition } from "react-transition-group";
 
 const Notification: FunctionComponent = () => {
   const [isExpanded] = useState(true);
 
-  const dispatch = useDispatch<AppDispatch>();
   const { listMessage } = useSelector((state: RootState) => state.universe);
-
-  const handleFetchMessages = (): void => {
-    dispatch(setIsLoading(true));
-
-    dispatch(fetchListMessages())
-      .catch((error) => {
-        console.log(error);
-      })
-      .finally(() => {
-        dispatch(setIsLoading(false));
-      });
-  };
-
-  useEffect(() => {
-    handleFetchMessages();
-  }, []);
 
   return (
     <CSSTransition in={isExpanded} timeout={300} unmountOnExit>
