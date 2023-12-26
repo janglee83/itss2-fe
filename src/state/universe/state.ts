@@ -29,11 +29,13 @@ export interface IUniverseState {
   createQuestion: ICreateQuestion;
   createAnswer: ICreateAnswer;
   listMessage: IMessageState[];
+  message: string;
 }
 
 export const initialState: IUniverseState = {
   isLoading: false,
   sort: "trending",
+  message: "",
   createQuestion: {
     anonymous: false,
     editorContent: "",

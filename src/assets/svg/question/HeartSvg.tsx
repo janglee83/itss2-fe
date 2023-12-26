@@ -1,14 +1,22 @@
+import { type AppDispatch } from "state/store";
+import { handleLikeComment } from "state/universe/reducer";
 import { useState, type FunctionComponent } from "react";
+import { useDispatch } from "react-redux";
 
 interface IHeartSvg {
   className: string;
+  answerId: number;
 }
 
-const HeartSvg: FunctionComponent<IHeartSvg> = ({ className }) => {
+const HeartSvg: FunctionComponent<IHeartSvg> = ({ className, answerId }) => {
+  const dispatch = useDispatch<AppDispatch>();
   const [isLiked, setIsLiked] = useState<boolean>(false);
 
   const handleChangeIsLikedValue = (): void => {
     setIsLiked((prevIsLiked) => !prevIsLiked);
+    dispatch(handleLikeComment(answerId)).catch((error) => {
+      console.log(error);
+    });
   };
 
   return (
