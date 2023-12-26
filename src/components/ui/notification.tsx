@@ -1,37 +1,33 @@
+import { type RootState, type AppDispatch } from "state/store";
+import { setIsLoading } from "state/universe";
+import { fetchListMessages } from "state/universe/reducer";
 import YellowNotification from "assets/svg/headers/YellowNotificationSvg";
 import UserAvatar from "assets/svg/question/UserAvatar";
-import { type FunctionComponent, useState } from "react";
+import { type FunctionComponent, useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { CSSTransition } from "react-transition-group";
 
 const Notification: FunctionComponent = () => {
   const [isExpanded] = useState(true);
-  const [notifications] = useState([
-    {
-      name: "Name",
-      content:
-        "đã thích câu trả lời của bạn đã thích câu trả lời của bạn đã thích câu trả lời của bạn đã thích câu trả lời của bạn đã thích câu trả lời của bạn",
-    },
-    {
-      name: "Name",
-      content: "đã thích câu trả lời của bạn",
-    },
-    {
-      name: "Name",
-      content: "đã thích câu trả lời của bạn",
-    },
-    {
-      name: "Name",
-      content: "đã thích câu trả lời của bạn",
-    },
-    {
-      name: "Name",
-      content: "đã thích câu trả lời của bạn",
-    },
-    {
-      name: "Name",
-      content: "đã thích câu trả lời của bạn",
-    },
-  ]);
+
+  const dispatch = useDispatch<AppDispatch>();
+  const { listMessage } = useSelector((state: RootState) => state.universe);
+
+  const handleFetchMessages = (): void => {
+    dispatch(setIsLoading(true));
+
+    dispatch(fetchListMessages())
+      .catch((error) => {
+        console.log(error);
+      })
+      .finally(() => {
+        dispatch(setIsLoading(false));
+      });
+  };
+
+  useEffect(() => {
+    handleFetchMessages();
+  }, []);
 
   return (
     <CSSTransition in={isExpanded} timeout={300} unmountOnExit>
@@ -48,10 +44,10 @@ const Notification: FunctionComponent = () => {
             <b>Thông báo</b>
           </div>
         </div>
-        {notifications.map((item) => (
+        {listMessage.map((item) => (
           <div
             className="flex items-center border-b border-solid border-gray-300"
-            key={item.name}
+            key={item.id}
           >
             <div className="m-2">
               <UserAvatar />
@@ -64,7 +60,7 @@ const Notification: FunctionComponent = () => {
                 display: "-webkit-box",
               }}
             >
-              <b>{item.name}</b> {item.content}
+              {item.content}
             </div>
           </div>
         ))}
