@@ -6,13 +6,20 @@ import { useState, type FunctionComponent } from "react";
 import UserAvatar from "assets/svg/question/UserAvatar";
 import ArrowDownSvg from "assets/svg/headers/ArrowDownSvg";
 import Notification from "components/ui/notification";
+import { useNavigate } from "react-router-dom";
 
 const NavbarComponent: FunctionComponent = () => {
   const [isExpanded, setIsExpanded] = useState<boolean>(false);
+  const navigate = useNavigate();
 
   const handleShowNoti = (): void => {
     setIsExpanded(!isExpanded);
   };
+
+  const handleRedirectToHome = (): void => {
+    navigate("/");
+  };
+
   return (
     <div className="bg-bg-black shadow-[0px_4px_4px_rgba(0,_0,_0,_0.25)] w-full h-20 overflow-hidden flex items-center justify-between py-3 px-6 text-xl text-neutral-13">
       <div className="flex items-center gap-[32px]">
@@ -33,7 +40,12 @@ const NavbarComponent: FunctionComponent = () => {
             <div className="relative leading-[22px] hidden">Button Title</div>
           </div>
         </div>
-        <div className="rounded-sm overflow-hidden flex items-center justify-center py-[6.4px] px-[15px] gap-[10px] text-base text-neutral-1">
+        <div
+          className="rounded-sm overflow-hidden flex items-center justify-center py-[6.4px] px-[15px] gap-[10px] text-base text-neutral-1 cursor-pointer"
+          onClick={() => {
+            handleRedirectToHome();
+          }}
+        >
           <div className="bg-hitbox overflow-hidden flex items-center">
             <HomeSvg />
           </div>

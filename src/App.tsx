@@ -4,17 +4,16 @@ import {
   CssBaseline,
   StyledEngineProvider,
 } from "@mui/material";
-import Routes from "./routes";
-import NavbarComponent from "./layouts/Navbar";
-import FooterComponent from "./layouts/Footer";
 import { type RootState } from "./state/store";
 import { useSelector } from "react-redux";
+import MainRoutes from "./routes/MainRoutes";
 
 export default function App(): JSX.Element {
   const universe = useSelector((state: RootState) => state.universe);
 
   return (
     <StyledEngineProvider injectFirst>
+      {/* <BrowserRouter> */}
       <Backdrop
         sx={{
           color: "#fff",
@@ -26,10 +25,9 @@ export default function App(): JSX.Element {
       </Backdrop>
       <CssBaseline />
       {/* <Provider> */}
-      <NavbarComponent />
-      <Routes />
-      <FooterComponent />
+      <MainRoutes />
       {/* </Provider> */}
+      {/* </BrowserRouter> */}
     </StyledEngineProvider>
   );
 }

@@ -1,32 +1,31 @@
-import { lazy } from "react";
-import { createBrowserRouter } from "react-router-dom";
+/* eslint-disable no-unused-vars */
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import { Suspense } from "react";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import NavbarComponent from "layouts/Navbar";
+import FooterComponent from "layouts/Footer";
+import routes from "./listRoutes";
 
-// import page
-const HomePage = lazy(async () => await import("pages/Home"));
-const QuestionPage = lazy(async () => await import("pages/question/index"));
-const QuestionDetailPage = lazy(
-  async () => await import("pages/question/QuestionDetail"),
-);
-
-export const MainRoutes = createBrowserRouter([
-  {
-    path: "/",
-    element: <HomePage />,
-    children: [],
-  },
-  {
-    path: "question",
-    children: [
-      {
-        path: "",
-        element: <QuestionPage />,
-        children: [],
-      },
-      {
-        path: "detail/:questionId",
-        element: <QuestionDetailPage />,
-        children: [],
-      },
-    ],
-  },
-]);
+export default function MainRoutes(): JSX.Element {
+  return (
+    <BrowserRouter>
+      <NavbarComponent />
+      <Suspense fallback={<div>Loading...</div>}>
+        <Routes>
+          {routes.map((route, index) => (
+            <Route key={index} path={route.path} element={route.element}>
+              {route.children?.map((childRoute, childIndex) => (
+                <Route
+                  key={childIndex}
+                  path={childRoute.path}
+                  element={childRoute.element}
+                />
+              ))}
+            </Route>
+          ))}
+        </Routes>
+      </Suspense>
+      <FooterComponent />
+    </BrowserRouter>
+  );
+}

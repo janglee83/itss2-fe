@@ -1,13 +1,22 @@
 import { type FunctionComponent } from "react";
+import { useNavigate } from "react-router-dom";
 
 const LogoSvg: FunctionComponent = () => {
+  const navigate = useNavigate();
+  const handleRedirectToHome = (): void => {
+    navigate("/");
+  };
   return (
     <svg
+      onClick={() => {
+        handleRedirectToHome();
+      }}
       width="86"
       height="36"
       viewBox="0 0 86 36"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
+      className="cursor-pointer"
     >
       <g clipPath="url(#clip0_819_358)">
         <path d="M3 8.5H0V17.5H3V8.5Z" fill="white" />
