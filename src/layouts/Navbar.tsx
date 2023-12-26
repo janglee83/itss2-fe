@@ -2,19 +2,26 @@ import NotificationSvg from "assets/svg/headers/NotificationSvg";
 import HomeSvg from "assets/svg/headers/HomeSvg";
 import LogoSvg from "assets/svg/headers/LogoSvg";
 import SearchSvg from "assets/svg/headers/SearchSvg";
-import { useState, type FunctionComponent } from "react";
+import { useState, type FunctionComponent, useEffect } from "react";
 import UserAvatar from "assets/svg/question/UserAvatar";
 import ArrowDownSvg from "assets/svg/headers/ArrowDownSvg";
 import Notification from "components/ui/notification";
 import { useNavigate } from "react-router-dom";
 import DropdownMenu from "components/ui/dropdownMenu";
+import { type AppDispatch, type RootState } from "state/store";
+import { useDispatch, useSelector } from "react-redux";
+import { setIsLoading } from "state/universe";
+import { fetchListMessages } from "state/universe/reducer";
 
 const NavbarComponent: FunctionComponent = () => {
   const [isExpanded, setIsExpanded] = useState<boolean>(false);
   const [isExpandedDropdownMenu, setIsExpandedDropdownMenu] =
     useState<boolean>(false);
+  const { listMessage } = useSelector((state: RootState) => state.universe);
+  const dispatch = useDispatch<AppDispatch>();
 
   const navigate = useNavigate();
+  const [notiCount, setNotiCount] = useState<number>(listMessage.length);
 
   const handleShowNoti = (): void => {
     setIsExpanded(!isExpanded);
@@ -27,6 +34,26 @@ const NavbarComponent: FunctionComponent = () => {
   const handleRedirectToHome = (): void => {
     navigate("/");
   };
+
+  const handleFetchMessages = (): void => {
+    dispatch(setIsLoading(true));
+
+    dispatch(fetchListMessages())
+      .catch((error) => {
+        console.log(error);
+      })
+      .finally(() => {
+        dispatch(setIsLoading(false));
+      });
+  };
+
+  useEffect(() => {
+    handleFetchMessages();
+  }, []);
+
+  useEffect(() => {
+    setNotiCount(listMessage.length);
+  }, [listMessage]);
 
   return (
     <div className="bg-bg-black shadow-[0px_4px_4px_rgba(0,_0,_0,_0.25)] w-full h-20 overflow-hidden flex items-center justify-between py-3 px-6 text-xl text-neutral-13">
@@ -69,6 +96,18 @@ const NavbarComponent: FunctionComponent = () => {
             }}
           >
             <NotificationSvg />
+            <div
+              style={{
+                position: "absolute",
+                right: "245px",
+                top: "10px",
+                borderRadius: "12px",
+                backgroundColor: "red",
+                padding: "0 8px",
+              }}
+            >
+              {notiCount}
+            </div>
             {isExpanded && <Notification />}
           </div>
         </div>
