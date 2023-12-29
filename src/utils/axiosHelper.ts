@@ -88,3 +88,11 @@ export const search = async ({
   const { data } = await apiHelper.get(url);
   return data;
 };
+
+export const likeComment = async (answerId: number) => {
+  const response = await apiHelper.put(`/answer/${answerId}/like`, {
+    userId: 1,
+  });
+
+  return response.data;
+};
