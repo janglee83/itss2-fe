@@ -6,11 +6,17 @@ import SearchSvg from "assets/svg/headers/SearchSvg";
 import UserAvatar from "assets/svg/question/UserAvatar";
 import DropdownMenu from "components/ui/dropdownMenu";
 import Notification from "components/ui/notification";
-import { useEffect, useState, type FunctionComponent } from "react";
+import {
+  startTransition,
+  useEffect,
+  useState,
+  type FunctionComponent,
+} from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { type AppDispatch, type RootState } from "state/store";
 import { setIsLoading } from "state/universe";
+import { setKeyword } from "state/search";
+import { type AppDispatch, type RootState } from "state/store";
 import { fetchListMessages } from "state/universe/reducer";
 
 const NavbarComponent: FunctionComponent = () => {
@@ -58,11 +64,12 @@ const NavbarComponent: FunctionComponent = () => {
   const [searchQuery, setSearchQuery] = useState("");
   // const navigate = useNavigate();
   const handleSearchClick = (): void => {
-    // if (searchQuery.trim() !== "") {
-    //   startTransition(() => {
-    //     navigate(`/search/${encodeURIComponent(searchQuery)}`);
-    //   });
-    // }
+    if (searchQuery.trim() !== "") {
+      dispatch(setKeyword(searchQuery));
+      startTransition(() => {
+        navigate(`/search?keyword=${encodeURIComponent(searchQuery)}`);
+      });
+    }
   };
 
   return (
