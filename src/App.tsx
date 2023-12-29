@@ -8,7 +8,7 @@ import { useSelector } from "react-redux";
 import MainRoutes from "./routes/MainRoutes";
 import { type RootState } from "./state/store";
 import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css"
+import "react-toastify/dist/ReactToastify.css";
 
 export default function App(): JSX.Element {
   const universe = useSelector((state: RootState) => state.universe);
