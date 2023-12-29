@@ -5,7 +5,7 @@ import StarSvg from "assets/svg/question/StarSvg";
 import UserAvatar from "assets/svg/question/UserAvatar";
 import { type ReactNode, type FunctionComponent } from "react";
 import { useSelector } from "react-redux";
-import getRelativeTime from "utils/helper";
+import moment from "moment";
 
 const QuestionContent: FunctionComponent = () => {
   const questionDetailState = useSelector(
@@ -23,7 +23,7 @@ const QuestionContent: FunctionComponent = () => {
             {questionDetailState.authorDetail.fullName}
           </div>
           <div className="text-gray-300 leading-[24px]">
-            {getRelativeTime(questionDetailState.createAt)}
+            {moment(questionDetailState.createAt).format("DD/MM/YYYY HH:mm")}
           </div>
         </div>
         <div className="relative w-11 text-sm text-character-secondary-45 gap-[6px] flex items-center">

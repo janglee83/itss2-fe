@@ -11,6 +11,7 @@ import { useDispatch } from "react-redux";
 import { acceptAnswer } from "../../state/questionDetail/reducers";
 import { setIsLoading } from "state/universe";
 import { useNavigate } from "react-router-dom";
+import moment from "moment";
 
 interface IQuestionAnswer {
   onRender: () => void;
@@ -62,7 +63,9 @@ const QuestionAnswer: FunctionComponent<IQuestionAnswer> = ({
           <div className="font-medium leading-[24px]">
             {answer.authorDetail.fullName}
           </div>
-          <div className="text-gray-300 leading-[24px]">{answer.createAt}</div>
+          <div className="text-gray-300 px-4 leading-[24px]">
+            {moment(answer.createAt).format("DD/MM/YYYY HH:mm")}
+          </div>
         </div>
         <div className="text-sm text-character-secondary-45">
           <div className="flex items-center">
