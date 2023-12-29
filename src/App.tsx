@@ -4,9 +4,9 @@ import {
   CssBaseline,
   StyledEngineProvider,
 } from "@mui/material";
-import { type RootState } from "./state/store";
 import { useSelector } from "react-redux";
 import MainRoutes from "./routes/MainRoutes";
+import { type RootState } from "./state/store";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 

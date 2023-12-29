@@ -1,10 +1,10 @@
 export interface IAuthor {
   id: number;
   fullname: string;
-  email: string;
-  gender: number;
+  email?: string;
+  gender?: number;
   avatarurl: string;
-  ispublic: number;
+  ispublic?: number;
 }
 
 export interface ITag {

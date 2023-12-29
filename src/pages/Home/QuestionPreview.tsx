@@ -42,7 +42,6 @@ const QuestionPreview: FunctionComponent<IQuestionPreview> = ({ question }) => {
     });
   };
 
-  console.log(formatNumber(10400));
   return (
     <div
       className="bg-neutral-1 py-2.5 px-[23px] border-[1px] border-solid border-gray-100 rounded-lg flex gap-[18px] mb-[10px] cursor-pointer"
