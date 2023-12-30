@@ -191,7 +191,7 @@ const CreatePostDialog: FunctionComponent<CreatePostDialogProps> = ({
                 Huỷ bỏ
               </Button>
               <Button
-                className="bg-blue-500 hover.bg-blue-700 text-white font.bold py-2 px-4 w-40 rounded-3xl"
+                className="bg-blue-500 hover:bg-blue-700 text-white font.bold py-2 px-4 w-40 rounded-3xl"
                 disabled={isSubmitting}
                 disableElevation
                 fullWidth
