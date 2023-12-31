@@ -19,22 +19,7 @@ interface IQuestionPreview {
 
 const QuestionPreview: FunctionComponent<IQuestionPreview> = ({ question }) => {
   const [author] = useState<IAuthor>(question.author);
-  const [tags] = useState<ITag[]>(question.tags);
   const navigate = useNavigate();
-
-  const renderTagComponent = (): JSX.Element[] => {
-    return tags.map((tag: ITag) => {
-      return (
-        <div
-          className="self-stretch rounded-sm flex flex-row items-center justify-start py-px px-2 border-[1px] border-solid text-white"
-          key={tag.id}
-          style={{ backgroundColor: tag.color }}
-        >
-          <div className="relative leading-[22px]">{tag.tagname}</div>
-        </div>
-      );
-    });
-  };
 
   const handleRedict = (questionId: number): void => {
     startTransition(() => {
@@ -119,7 +104,17 @@ const QuestionPreview: FunctionComponent<IQuestionPreview> = ({ question }) => {
           </div>
           <div className="bg-hitbox overflow-hidden flex flex-col items-start justify-center p-2 text-polar-green-6">
             <div className="shrink-0 flex flex-row items-center justify-end gap-[8px]">
-              {renderTagComponent()}
+              {question.tags.map((tag: ITag) => {
+                return (
+                  <div
+                    className="self-stretch rounded-sm flex flex-row items-center justify-start py-px px-2 border-[1px] border-solid text-white"
+                    key={tag.id}
+                    style={{ backgroundColor: tag.color }}
+                  >
+                    <div className="relative leading-[22px]">{tag.tagname}</div>
+                  </div>
+                );
+              })}
             </div>
           </div>
         </div>

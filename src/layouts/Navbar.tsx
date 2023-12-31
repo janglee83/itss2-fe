@@ -38,7 +38,7 @@ const NavbarComponent: FunctionComponent = () => {
   };
 
   const handleRedirectToHome = (): void => {
-    navigate("/");
+    navigate(0);
   };
 
   const handleFetchMessages = (): void => {

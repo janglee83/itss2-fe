@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 const LogoSvg: FunctionComponent = () => {
   const navigate = useNavigate();
   const handleRedirectToHome = (): void => {
-    navigate("/");
+    navigate(0);
   };
   return (
     <svg
