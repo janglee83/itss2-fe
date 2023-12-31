@@ -20,7 +20,7 @@ const questionDetailSlice = createSlice({
           id,
           title,
           content,
-          // isanonymous,
+          isanonymous,
           viewcount,
           likecount,
           acceptedanswerid,
@@ -37,6 +37,7 @@ const questionDetailSlice = createSlice({
         state.likeCount = likecount;
         state.createAt = createdat;
         state.updateAt = updatedat;
+        state.isanonymous = isanonymous;
 
         // author
         state.authorDetail.id = author.id;
@@ -67,6 +68,7 @@ const questionDetailSlice = createSlice({
             content: string;
             likecount: number;
             questionid: number;
+            isanonymous: number;
             user: {
               id: number;
               fullname: string;
@@ -81,6 +83,7 @@ const questionDetailSlice = createSlice({
               content: item.content,
               likeCount: item.likecount,
               questionId: item.questionid,
+              isanonymous: item.isanonymous,
               authorDetail: {
                 id: item.user.id,
                 fullName: item.user.fullname,
