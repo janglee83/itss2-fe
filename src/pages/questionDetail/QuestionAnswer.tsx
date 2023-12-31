@@ -53,15 +53,28 @@ const QuestionAnswer: FunctionComponent<IQuestionAnswer> = ({
       });
   };
 
+  const renderImageComponent = (): JSX.Element => {
+    if (answer.isanonymous > 0) return <UserAvatar />;
+    return (
+      <img
+        src={answer.authorDetail.avatarUrl}
+        style={{
+          maxWidth: "45px",
+          maxHeight: "45px",
+        }}
+      />
+    );
+  };
+
   return (
     <div className="text-button-primary rounded-lg bg-character-primaryinverse py-3 pr-0 pl-3 border-[1px] border-solid border-gray-400 flex my-[18px]">
       <div className="rounded-81xl bg-cover bg-no-repeat bg-[top] max-w-[45px] w-full">
-        <UserAvatar />
+        {renderImageComponent()}
       </div>
       <div className="py-0 px-4 relative gap-[10px]">
         <div className="z-[0] flex ">
           <div className="font-medium leading-[24px]">
-            {answer.authorDetail.fullName}
+            {answer.isanonymous > 0 ? "Ẩn danh" : answer.authorDetail.fullName}
           </div>
           <div className="text-gray-300 px-4 leading-[24px]">
             {moment(answer.createAt).format("DD/MM/YYYY HH:mm")}

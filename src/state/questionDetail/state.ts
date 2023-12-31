@@ -19,6 +19,7 @@ export interface IAnswerDetail {
   authorDetail: IAuthorDetail;
   createAt: string;
   diem_danh_gia: number;
+  isanonymous: number;
 }
 
 export interface IQuestionDetailState {
@@ -33,6 +34,7 @@ export interface IQuestionDetailState {
   authorDetail: IAuthorDetail;
   tagsDetail: ITagDetail[];
   answersDetail: IAnswerDetail[];
+  isanonymous: number;
 }
 
 export const initialState: IQuestionDetailState = {
@@ -44,6 +46,7 @@ export const initialState: IQuestionDetailState = {
   createAt: "",
   updateAt: "",
   acceptedAnswerId: null,
+  isanonymous: 0,
   authorDetail: {
     id: 0,
     fullName: "",
@@ -63,6 +66,7 @@ export const initialState: IQuestionDetailState = {
       content: "",
       likeCount: 0,
       questionId: 0,
+      isanonymous: 0,
       authorDetail: {
         id: 0,
         fullName: "",

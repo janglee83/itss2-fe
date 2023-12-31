@@ -12,15 +12,30 @@ const QuestionContent: FunctionComponent = () => {
     (state: RootState) => state.questionDetail,
   );
 
+  const renderImageComponent = (): JSX.Element => {
+    if (questionDetailState.isanonymous > 0) return <UserAvatar />;
+    return (
+      <img
+        src={questionDetailState.authorDetail.avatarUrl}
+        style={{
+          maxWidth: "45px",
+          maxHeight: "45px",
+        }}
+      />
+    );
+  };
+
   return (
     <div className="rounded-md bg-character-primaryinverse py-3 pr-0 pl-3 text-center text-volcano-6 border-[1px] border-solid border-gray-400 flex">
       <div className="rounded-81xl bg-volcano-2 self-stretch overflow-hidden relative leading-[24px] max-w-[45px] w-full">
-        <UserAvatar />
+        {renderImageComponent()}
       </div>
       <div className="py-0 px-4 gap-[10px] text-left text-text-default">
         <div className="self-stretch overflow-hidden gap-[24px] flex">
           <div className="font-medium leading-[24px]">
-            {questionDetailState.authorDetail.fullName}
+            {questionDetailState.isanonymous > 0
+              ? "Ẩn danh"
+              : questionDetailState.authorDetail.fullName}
           </div>
           <div className="text-gray-300 leading-[24px]">
             {moment(questionDetailState.createAt).format("DD/MM/YYYY HH:mm")}

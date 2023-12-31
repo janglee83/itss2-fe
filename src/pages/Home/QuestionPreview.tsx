@@ -42,6 +42,21 @@ const QuestionPreview: FunctionComponent<IQuestionPreview> = ({ question }) => {
     });
   };
 
+  const renderImageComponent = (): JSX.Element => {
+    if (question.isanonymous > 0)
+      return <UserAvatar style={{ zoom: "calc(80 / 45)" }} />;
+    return (
+      <img
+        src={question.author.avatarurl}
+        style={{
+          zoom: "calc(80 / 45)",
+          maxWidth: "45px",
+          maxHeight: "45px",
+        }}
+      />
+    );
+  };
+
   return (
     <div
       className="bg-neutral-1 py-2.5 px-[23px] border-[1px] border-solid border-gray-100 rounded-lg flex gap-[18px] mb-[10px] cursor-pointer"
@@ -51,7 +66,7 @@ const QuestionPreview: FunctionComponent<IQuestionPreview> = ({ question }) => {
     >
       <div className="rounded-81xl flex flex-col items-end justify-start">
         <div className="self-stretch flex-1 flex flex-row items-center justify-center">
-          <UserAvatar style={{ zoom: "calc(80 / 45)" }} />
+          {renderImageComponent()}
         </div>
       </div>
       <div className="flex flex-col grow">
