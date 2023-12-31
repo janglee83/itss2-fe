@@ -1,20 +1,17 @@
 /* eslint-disable @typescript-eslint/no-misused-promises */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { type FunctionComponent } from "react";
+import { useState, type FunctionComponent } from "react";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import Button from "@mui/material/Button";
-import makeAnimated from "react-select/animated";
 import "react-quill/dist/quill.snow.css";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
-import { colourOptions } from "data/subject";
 import { useDispatch, useSelector } from "react-redux";
 import { type RootState, type AppDispatch } from "state/store";
-import Select from "react-select";
 import { Field, Formik } from "formik";
 import * as Yup from "yup";
 import { type ICreateQuestion } from "state/universe/state";
@@ -22,8 +19,7 @@ import { FormControlLabel, FormHelperText, Switch } from "@mui/material";
 import ReactQuill from "react-quill";
 import { createNewQuestion } from "state/questionDetail/reducers";
 import { setIsLoading } from "state/universe";
-
-const animatedComponents = makeAnimated();
+import CustomSelect from "./customSelect";
 
 interface CreatePostDialogProps {
   open: boolean;
@@ -64,6 +60,7 @@ const CreatePostDialog: FunctionComponent<CreatePostDialogProps> = ({
   const createQuestion = useSelector(
     (state: RootState) => state.universe.createQuestion,
   );
+  const [listTags, setListTags] = useState<string[]>([]);
 
   const handleSubmitForm = async (
     values: ICreateQuestion,
@@ -77,7 +74,7 @@ const CreatePostDialog: FunctionComponent<CreatePostDialogProps> = ({
     const payload = {
       title: values.title,
       content: values.editorContent,
-      tags: ["tag 1", "tag 2"],
+      tags: listTags,
       is_anonymous: values.anonymous ? 1 : 0,
       user_id: 1,
     };
@@ -93,6 +90,10 @@ const CreatePostDialog: FunctionComponent<CreatePostDialogProps> = ({
     } finally {
       dispatch(setIsLoading(false));
     }
+  };
+
+  const updateListTagsState = (newValue: string[]): void => {
+    setListTags(newValue);
   };
   return (
     <Dialog maxWidth="md" fullWidth open={open} onClose={handleClose}>
@@ -143,12 +144,7 @@ const CreatePostDialog: FunctionComponent<CreatePostDialogProps> = ({
               <DialogContentText className="text-2xl font-semibold text-black mb-5">
                 Gắn thẻ cho câu hỏi
               </DialogContentText>
-              <Select
-                closeMenuOnSelect={false}
-                components={animatedComponents}
-                isMulti
-                options={colourOptions}
-              />
+              <CustomSelect updateListTagsState={updateListTagsState} />
               <DialogContentText className="text-2xl font-semibold text-black my-5">
                 Nội dung
               </DialogContentText>
