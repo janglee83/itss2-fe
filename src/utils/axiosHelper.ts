@@ -45,6 +45,11 @@ export const getAllQuestionInMainPage = async ({
 };
 
 export const getAllTags = async () => {
+  const { data } = await apiHelper.get("/tag/all");
+  return data;
+};
+
+export const getTopTags = async () => {
   const { data } = await apiHelper.get("/tag/top-tags");
   return data;
 };
@@ -76,8 +81,13 @@ export const search = async ({
 
   if (keyword !== undefined && keyword !== null)
     params.append("keyword", keyword);
-  if (tags !== undefined && tags !== null)
-    params.append("tags", tags.join(","));
+  if (tags !== undefined && tags !== null && tags.length > 0) {
+    tags.forEach((tag) => {
+      if (typeof tag === "string") {
+        params.append("tags[]", tag);
+      }
+    });
+  }
   if (sort !== undefined && sort !== null) params.append("sort", sort);
   if (page !== undefined && page !== null)
     params.append("page", page.toString());

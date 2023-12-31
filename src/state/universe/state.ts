@@ -25,7 +25,8 @@ export interface IMessageState {
 export interface IUniverseState {
   isLoading: boolean;
   sort: TSort;
-  tags: ITag[];
+  listtags: ITag[];
+  toptags: ITag[];
   createQuestion: ICreateQuestion;
   createAnswer: ICreateAnswer;
   listMessage: IMessageState[];
@@ -57,7 +58,15 @@ export const initialState: IUniverseState = {
       createdat: "",
     },
   ],
-  tags: [
+  toptags: [
+    {
+      id: 0,
+      tagname: "",
+      color: "",
+      count: 0,
+    },
+  ],
+  listtags: [
     {
       id: 0,
       tagname: "",

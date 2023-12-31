@@ -1,8 +1,13 @@
-import { type PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { type IUniverseState, initialState } from "./state";
-import { fetchListMessages, fetchListTag, handleLikeComment } from "./reducer";
-import { type TSort } from "../defineInterface";
+import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 import { toast } from "react-toastify";
+import { type TSort } from "../defineInterface";
+import {
+  fetchListMessages,
+  fetchListTag,
+  fetchTopTag,
+  handleLikeComment,
+} from "./reducer";
+import { initialState, type IUniverseState } from "./state";
 
 const universeSlice = createSlice({
   name: "universe",
@@ -35,9 +40,13 @@ const universeSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
+      .addCase(fetchTopTag.fulfilled, (state: IUniverseState, action) => {
+        const { payload } = action;
+        state.toptags = payload;
+      })
       .addCase(fetchListTag.fulfilled, (state: IUniverseState, action) => {
         const { payload } = action;
-        state.tags = payload;
+        state.listtags = payload;
       })
       .addCase(fetchListMessages.fulfilled, (state: IUniverseState, action) => {
         const { payload } = action;

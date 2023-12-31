@@ -9,7 +9,11 @@ import routes from "./listRoutes";
 export default function MainRoutes(): JSX.Element {
   return (
     <BrowserRouter>
-      <div id="container" style={{ minHeight: "100vh", paddingBottom: "35px" }}>
+      <div
+        id="container"
+        className="flex flex-col"
+        style={{ minHeight: "100vh", paddingBottom: "35px" }}
+      >
         <NavbarComponent />
         <Suspense fallback={<div>Loading...</div>}>
           <Routes>

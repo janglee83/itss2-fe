@@ -29,6 +29,7 @@ export interface IQuestionDetailState {
   viewCount: number;
   likeCount: number;
   acceptedAnswerId: number | null;
+  isanonymous: number;
   createAt: string;
   updateAt: string;
   authorDetail: IAuthorDetail;
@@ -43,6 +44,7 @@ export const initialState: IQuestionDetailState = {
   content: "",
   viewCount: 0,
   likeCount: 0,
+  isanonymous: 1,
   createAt: "",
   updateAt: "",
   acceptedAnswerId: null,

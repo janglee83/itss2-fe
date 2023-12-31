@@ -1,13 +1,16 @@
 import {
-  type AutocompleteGetTagProps,
   useAutocomplete,
+  type AutocompleteGetTagProps,
 } from "@mui/base/useAutocomplete";
 import CheckIcon from "@mui/icons-material/Check";
 import CloseIcon from "@mui/icons-material/Close";
 import { autocompleteClasses } from "@mui/material/Autocomplete";
 import { styled } from "@mui/material/styles";
-import { type FunctionComponent } from "react";
+import { useEffect, type FunctionComponent } from "react";
 import { type ITag } from "state/defineInterface";
+import { useDispatch } from "react-redux";
+import { setTag } from "state/search";
+import { type AppDispatch } from "state/store";
 
 const Root = styled("div")(
   ({ theme }) => `
@@ -172,7 +175,13 @@ const InputTag: FunctionComponent<IInputTag> = ({ options }) => {
     getOptionLabel: (option: ITag) => option.tagname,
   });
 
-  // const isTagLimitReached = value.length >= 5;
+  const dispatch = useDispatch<AppDispatch>();
+
+  useEffect(() => {
+    dispatch(setTag(value));
+  }, [value]);
+
+  const isTagLimitReached = value.length >= 5;
 
   return (
     <Root>
@@ -188,7 +197,7 @@ const InputTag: FunctionComponent<IInputTag> = ({ options }) => {
               })}
             />
           ))}
-          <input {...getInputProps()} />
+          <input {...getInputProps()} disabled={isTagLimitReached} />
         </InputWrapper>
       </div>
       {groupedOptions.length > 0 ? (

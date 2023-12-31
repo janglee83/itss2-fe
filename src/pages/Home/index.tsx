@@ -7,7 +7,7 @@ import { type AppDispatch, type RootState } from "@/state/store";
 import { fetchListQuestion } from "state/questionList/reducer";
 import { Pagination } from "@mui/material";
 import { setIsLoading } from "state/universe";
-import { fetchListTag } from "state/universe/reducer";
+import { fetchTopTag } from "state/universe/reducer";
 
 const Home: FunctionComponent = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -34,7 +34,7 @@ const Home: FunctionComponent = () => {
   const handleGetAllTags = (): void => {
     dispatch(setIsLoading(true));
 
-    dispatch(fetchListTag())
+    dispatch(fetchTopTag())
       .catch((error) => {
         console.log(error);
       })
@@ -65,27 +65,31 @@ const Home: FunctionComponent = () => {
 
   return (
     <>
-      <div className="mt-6 max-w-[1224px] mx-auto">
-        <div className="overflow-hidden text-left text-sm text-character-primary-85 font-footnote-description">
-          <HomeHeader sort={universe.sort} />
+      <div>
+        <div className="mt-6 max-w-[1224px] mx-auto">
+          <div className="overflow-hidden text-left text-sm text-character-primary-85 font-footnote-description">
+            <HomeHeader sort={universe.sort} />
+          </div>
         </div>
       </div>
-      <div className="bg-whitesmoke">
+      <div className="bg-whitesmoke grow">
         <div className="max-w-[1224px] mx-auto py-6">
           <div className="text-left text-sm text-character-primary-85 font-footnote-description">
             <div className="flex gap-[24px]">
               <div className="text-xs text-button-primary w-full">
                 {renderQuestionPreview()}
                 <div className="flex justify-center mt-[32px]">
-                  <Pagination
-                    count={questionList.totalPages}
-                    onChange={(e, value) => {
-                      setCurrentPage(value);
-                    }}
-                  />
+                  {questionList.totalPages > 0 && (
+                    <Pagination
+                      count={Number(questionList.totalPages)}
+                      onChange={(e, value) => {
+                        setCurrentPage(value);
+                      }}
+                    />
+                  )}
                 </div>
               </div>
-              <TagList tags={universe.tags} />
+              <TagList tags={universe.toptags} />
             </div>
           </div>
         </div>
