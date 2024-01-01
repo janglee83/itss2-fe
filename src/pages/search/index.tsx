@@ -1,6 +1,5 @@
 import { type AppDispatch, type RootState } from "@/state/store";
 import { Pagination } from "@mui/material";
-import NoData from "components/ui/NoData";
 import {
   // startTransition,
   useEffect,
@@ -14,6 +13,7 @@ import { setFilter, setIsLoading } from "state/search";
 import { fetchResult } from "state/search/reducer";
 import { setIsLoading as setListTagIsLoading } from "state/universe";
 import { fetchListTag, fetchTopTag } from "state/universe/reducer";
+import NoData from "components/ui/NoData";
 import QuestionPreview from "../Home/QuestionPreview";
 import TagList from "../Home/TagList";
 import Filter from "./Filter";

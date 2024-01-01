@@ -35,7 +35,6 @@ export interface IQuestionDetailState {
   authorDetail: IAuthorDetail;
   tagsDetail: ITagDetail[];
   answersDetail: IAnswerDetail[];
-  isanonymous: number;
 }
 
 export const initialState: IQuestionDetailState = {
@@ -44,7 +43,6 @@ export const initialState: IQuestionDetailState = {
   content: "",
   viewCount: 0,
   likeCount: 0,
-  isanonymous: 1,
   createAt: "",
   updateAt: "",
   acceptedAnswerId: null,

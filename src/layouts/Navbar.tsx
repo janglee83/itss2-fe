@@ -38,7 +38,7 @@ const NavbarComponent: FunctionComponent = () => {
   };
 
   const handleRedirectToHome = (): void => {
-    navigate(0);
+    navigate("/");
   };
 
   const handleFetchMessages = (): void => {
@@ -71,6 +71,13 @@ const NavbarComponent: FunctionComponent = () => {
       });
     }
   };
+
+  useEffect(() => {
+    const searchParams = new URLSearchParams(location.search);
+    const keyword = searchParams.get("keyword") ?? "";
+
+    setSearchQuery(keyword);
+  }, [location.search]);
 
   return (
     <div className="bg-bg-black shadow-[0px_4px_4px_rgba(0,_0,_0,_0.25)] w-full h-20 overflow-hidden flex items-center justify-between py-3 px-6 text-xl text-neutral-13">

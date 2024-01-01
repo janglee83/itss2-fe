@@ -1,12 +1,13 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
-import CreatableSelect from "react-select/creatable";
-import chroma from "chroma-js";
-import { type MultiValue, type StylesConfig } from "react-select";
-import { useSelector } from "react-redux";
 import { type RootState } from "@/state/store";
-import { useEffect, type FunctionComponent, useState } from "react";
+import chroma from "chroma-js";
+import { useEffect, useState, type FunctionComponent } from "react";
+import { useSelector } from "react-redux";
+import { type MultiValue, type StylesConfig } from "react-select";
+import CreatableSelect from "react-select/creatable";
+import { type ITag } from "state/defineInterface";
 
 interface ITagOption {
   readonly color: string;
@@ -100,11 +101,11 @@ interface ICustomSelect {
 const CustomSelect: FunctionComponent<ICustomSelect> = ({
   updateListTagsState,
 }) => {
-  const listTags = useSelector((state: RootState) => state.universe.tags);
+  const listTags = useSelector((state: RootState) => state.universe.listtags);
   const [tags, setTags] = useState<ITagOption[]>([]);
   useEffect(() => {
     setTags(
-      listTags.map((item) => ({
+      listTags.map((item: ITag) => ({
         color: item.color,
         count: item.count,
         id: item.id,
