@@ -6,11 +6,12 @@ import CheckIcon from "@mui/icons-material/Check";
 import CloseIcon from "@mui/icons-material/Close";
 import { autocompleteClasses } from "@mui/material/Autocomplete";
 import { styled } from "@mui/material/styles";
-import { useEffect, type FunctionComponent } from "react";
+import { type FunctionComponent } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { type ITag } from "state/defineInterface";
-import { useDispatch } from "react-redux";
 import { setTag } from "state/search";
-import { type AppDispatch } from "state/store";
+import { type AppDispatch, type RootState } from "state/store";
 
 const Root = styled("div")(
   ({ theme }) => `
@@ -157,6 +158,10 @@ interface IInputTag {
 }
 
 const InputTag: FunctionComponent<IInputTag> = ({ options }) => {
+  const dispatch = useDispatch<AppDispatch>();
+  const search = useSelector((state: RootState) => state.search);
+  const navigate = useNavigate();
+
   const {
     getRootProps,
     getInputProps,
@@ -169,17 +174,20 @@ const InputTag: FunctionComponent<IInputTag> = ({ options }) => {
     setAnchorEl,
   } = useAutocomplete({
     id: "customized-hook-demo",
-    defaultValue: [],
+    value: search.tags,
+    onChange: (e, v) => {
+      dispatch(setTag(v));
+      const searchParams = new URLSearchParams(location.search);
+      searchParams.set("tags", v.map((tag) => tag.tagname).join(","));
+
+      console.log(searchParams.toString());
+      // Update the URL with the new search parameters
+      navigate("/search?" + searchParams.toString());
+    },
     multiple: true,
     options: options,
     getOptionLabel: (option: ITag) => option.tagname,
   });
-
-  const dispatch = useDispatch<AppDispatch>();
-
-  useEffect(() => {
-    dispatch(setTag(value));
-  }, [value]);
 
   const isTagLimitReached = value.length >= 5;
 

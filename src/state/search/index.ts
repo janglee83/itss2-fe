@@ -31,7 +31,9 @@ const searchSlice = createSlice({
       state.page = action.payload.page;
       state.sort = action.payload.sort;
       state.status = action.payload.status;
-      // state.tags = action.payload.tags;
+
+      // Use type assertion here
+      state.tags = action.payload.tags as ITag[] | undefined;
     },
   },
   extraReducers: (builder) => {

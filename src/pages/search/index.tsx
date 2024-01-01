@@ -9,7 +9,7 @@ import {
 } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
-import { type TSort, type TStatus } from "state/defineInterface";
+import { type ITag, type TSort, type TStatus } from "state/defineInterface";
 import { setFilter, setIsLoading } from "state/search";
 import { fetchResult } from "state/search/reducer";
 import { setIsLoading as setListTagIsLoading } from "state/universe";
@@ -81,23 +81,25 @@ const Search: FunctionComponent = () => {
   };
 
   useEffect(() => {
+    handleGetAllTags();
+    handleGetTopTags();
+  }, []);
+
+  useEffect(() => {
     const searchParams = new URLSearchParams(location.search);
     const keyword = searchParams.get("keyword") ?? "";
-    const tags = searchParams.getAll("tags") ?? [];
+    const tags = searchParams.get("tags")?.split(/[,%2C]/) ?? [];
     const sort: TSort = (searchParams.get("sort") ?? "newest") as TSort;
     const status: TStatus = (searchParams.get("status") ?? "all") as TStatus;
     const page = Number(searchParams.get("page") ?? 1);
 
-    handleGetAllTags();
-    handleGetTopTags();
-
-    let listTag;
+    let listTag: ITag[] = [];
     if (universe.listtags?.length > 0 && tags?.length > 0) {
       listTag = universe.listtags.filter((tagObject) => {
         return tags.includes(tagObject.tagname);
       });
     }
-    // if (keyword !== "") {
+
     dispatch(
       setFilter({
         sort,
@@ -107,24 +109,11 @@ const Search: FunctionComponent = () => {
         keyword,
       }),
     );
-
-    // } else {
-    //   startTransition(() => {
-    //     navigate("/");
-    //   });
-    // }
-  }, []);
+  }, [location.search, universe.listtags]);
 
   useEffect(() => {
     handleResult();
-  }, [
-    search.keyword,
-    currentPage,
-    search.sort,
-    search.status,
-    search.tags,
-    search,
-  ]);
+  }, [search.keyword, currentPage, search.sort, search.status, search.tags]);
 
   return (
     <>
