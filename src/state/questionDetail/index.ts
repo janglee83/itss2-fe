@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/naming-convention */
 import { createSlice } from "@reduxjs/toolkit";
 import {
   type IQuestionDetailState,
@@ -29,6 +30,7 @@ const questionDetailSlice = createSlice({
           author,
           tags,
           answers,
+          is_liked,
         } = payload;
         state.id = id;
         state.title = title;
@@ -38,6 +40,7 @@ const questionDetailSlice = createSlice({
         state.createAt = createdat;
         state.updateAt = updatedat;
         state.isanonymous = isanonymous;
+        state.is_liked = is_liked;
 
         // author
         state.authorDetail.id = author.id;
@@ -77,6 +80,7 @@ const questionDetailSlice = createSlice({
             };
             createdat: string;
             diem_danh_gia: number;
+            is_liked: boolean;
           }): IAnswerDetail => {
             return {
               id: item.id,
@@ -84,6 +88,7 @@ const questionDetailSlice = createSlice({
               likeCount: item.likecount,
               questionId: item.questionid,
               isanonymous: item.isanonymous,
+              is_liked: item.is_liked,
               authorDetail: {
                 id: item.user.id,
                 fullName: item.user.fullname,

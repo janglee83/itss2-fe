@@ -6,17 +6,28 @@ import { useDispatch } from "react-redux";
 interface IHeartSvg {
   className: string;
   answerId: number;
+  isLikeByUser: boolean;
 }
 
-const HeartSvg: FunctionComponent<IHeartSvg> = ({ className, answerId }) => {
+const HeartSvg: FunctionComponent<IHeartSvg> = ({
+  className,
+  answerId,
+  isLikeByUser,
+}) => {
   const dispatch = useDispatch<AppDispatch>();
-  const [isLiked, setIsLiked] = useState<boolean>(false);
+  const [isLiked, setIsLiked] = useState<boolean>(isLikeByUser);
 
   const handleChangeIsLikedValue = (): void => {
     setIsLiked((prevIsLiked) => !prevIsLiked);
-    dispatch(handleLikeComment(answerId)).catch((error) => {
-      console.log(error);
-    });
+    dispatch(handleLikeComment(answerId))
+      .then(() => {
+        setTimeout(() => {
+          window.location.reload();
+        }, 1500);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   return (

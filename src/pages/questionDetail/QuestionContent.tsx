@@ -72,6 +72,7 @@ const QuestionContent: FunctionComponent = () => {
           <HeartSvg
             className="cursor-pointer"
             answerId={questionDetailState.id}
+            isLikeByUser={questionDetailState.is_liked}
           />
           <div className="overflow-hidden relative leading-[22px]">
             {questionDetailState.likeCount}
