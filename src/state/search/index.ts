@@ -1,8 +1,8 @@
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 import { type ITag, type TSort, type TStatus } from "../defineInterface";
-import { type IFilter, initialState, type ISearchState } from "./state";
-import { fetchResult } from "./reducer";
 import { type IAuthor } from "../questionList/state";
+import { fetchResult } from "./reducer";
+import { initialState, type IFilter, type ISearchState } from "./state";
 
 const searchSlice = createSlice({
   name: "search",
@@ -23,12 +23,17 @@ const searchSlice = createSlice({
     setKeyword: (state: ISearchState, action: PayloadAction<string>): void => {
       state.keyword = action.payload;
     },
+    setTag: (state: ISearchState, action: PayloadAction<ITag[]>): void => {
+      state.tags = action.payload;
+    },
     setFilter: (state: ISearchState, action: PayloadAction<IFilter>): void => {
       state.keyword = action.payload.keyword;
       state.page = action.payload.page;
       state.sort = action.payload.sort;
       state.status = action.payload.status;
-      // state.tags = action.payload.tags;
+
+      // Use type assertion here
+      state.tags = action.payload.tags as ITag[] | undefined;
     },
   },
   extraReducers: (builder) => {
@@ -52,7 +57,13 @@ const searchSlice = createSlice({
   },
 });
 
-export const { setIsLoading, setSort, setStatus, setKeyword, setFilter } =
-  searchSlice.actions;
+export const {
+  setIsLoading,
+  setSort,
+  setStatus,
+  setKeyword,
+  setFilter,
+  setTag,
+} = searchSlice.actions;
 
 export default searchSlice.reducer;

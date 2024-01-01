@@ -28,7 +28,7 @@ const QuestionTitle: FunctionComponent = () => {
           <div className="flex flex-row items-center justify-start gap-[10px]">
             <CommentSvg />
             <div className="relative leading-[24px] font-medium flex items-center shrink-0">
-              3
+              {questionDetailState.answersDetail.length}
             </div>
           </div>
           <div className="flex flex-row items-center justify-start gap-[16px] text-sm text-gray-300 font-text-sm-text-sm">

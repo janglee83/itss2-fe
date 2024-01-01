@@ -1,14 +1,30 @@
 // import { getAllQuestionInMainPage } from "utils/axiosHelper";
 // import { createAsyncThunk } from "@reduxjs/toolkit";
 
-import { getAllTags, getListMessage, likeComment } from "utils/axiosHelper";
 import { createAsyncThunk } from "@reduxjs/toolkit";
+import {
+  getAllTags,
+  getListMessage,
+  getTopTags,
+  likeComment,
+} from "utils/axiosHelper";
 
 export const fetchListTag = createAsyncThunk(
   "universe/fetchListTags",
   async (payload, { rejectWithValue }) => {
     try {
       return await getAllTags();
+    } catch (error) {
+      return rejectWithValue((error as Error).message);
+    }
+  },
+);
+
+export const fetchTopTag = createAsyncThunk(
+  "universe/fetchTopTags",
+  async (payload, { rejectWithValue }) => {
+    try {
+      return await getTopTags();
     } catch (error) {
       return rejectWithValue((error as Error).message);
     }

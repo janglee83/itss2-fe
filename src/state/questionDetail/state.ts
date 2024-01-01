@@ -29,12 +29,12 @@ export interface IQuestionDetailState {
   viewCount: number;
   likeCount: number;
   acceptedAnswerId: number | null;
+  isanonymous: number;
   createAt: string;
   updateAt: string;
   authorDetail: IAuthorDetail;
   tagsDetail: ITagDetail[];
   answersDetail: IAnswerDetail[];
-  isanonymous: number;
 }
 
 export const initialState: IQuestionDetailState = {

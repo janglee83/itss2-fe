@@ -8,11 +8,12 @@ import {
 } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
-import { type TSort, type TStatus } from "state/defineInterface";
+import { type ITag, type TSort, type TStatus } from "state/defineInterface";
 import { setFilter, setIsLoading } from "state/search";
 import { fetchResult } from "state/search/reducer";
 import { setIsLoading as setListTagIsLoading } from "state/universe";
-import { fetchListTag } from "state/universe/reducer";
+import { fetchListTag, fetchTopTag } from "state/universe/reducer";
+import NoData from "components/ui/NoData";
 import QuestionPreview from "../Home/QuestionPreview";
 import TagList from "../Home/TagList";
 import Filter from "./Filter";
@@ -29,7 +30,7 @@ const Search: FunctionComponent = () => {
 
   const renderQuestionPreview = (): JSX.Element[] | JSX.Element => {
     if (search.result === null || search.result.data?.length === 0) {
-      return <div>No data</div>;
+      return <NoData />;
     }
 
     return search.result.data?.map((question, index) => {
@@ -49,14 +50,25 @@ const Search: FunctionComponent = () => {
       });
   };
 
+  const handleGetTopTags = (): void => {
+    dispatch(setListTagIsLoading(true));
+
+    dispatch(fetchTopTag())
+      .catch((error) => {
+        console.log(error);
+      })
+      .finally(() => {
+        dispatch(setListTagIsLoading(false));
+      });
+  };
+
   const handleResult = (): void => {
-    console.log(1, search.keyword);
     const payload = {
       page: currentPage,
       sort: search.sort,
       keyword: search.keyword,
       status: search.status,
-      // tags: search.tags,
+      tags: search.tags?.map((tag) => tag.tagname),
     };
     dispatch(setIsLoading(true));
     dispatch(fetchResult(payload))
@@ -69,45 +81,51 @@ const Search: FunctionComponent = () => {
   };
 
   useEffect(() => {
+    handleGetAllTags();
+    handleGetTopTags();
+  }, []);
+
+  useEffect(() => {
     const searchParams = new URLSearchParams(location.search);
     const keyword = searchParams.get("keyword") ?? "";
-    const tags = searchParams.getAll("tags") ?? [];
+    const tags = searchParams.get("tags")?.split(/[,%2C]/) ?? [];
     const sort: TSort = (searchParams.get("sort") ?? "newest") as TSort;
     const status: TStatus = (searchParams.get("status") ?? "all") as TStatus;
     const page = Number(searchParams.get("page") ?? 1);
 
-    // if (keyword !== "") {
+    let listTag: ITag[] = [];
+    if (universe.listtags?.length > 0 && tags?.length > 0) {
+      listTag = universe.listtags.filter((tagObject) => {
+        return tags.includes(tagObject.tagname);
+      });
+    }
+
     dispatch(
       setFilter({
         sort,
         page,
         status,
-        tags,
+        tags: listTag,
         keyword,
       }),
     );
-
-    handleGetAllTags();
-    // } else {
-    //   startTransition(() => {
-    //     navigate("/");
-    //   });
-    // }
-  }, []);
+  }, [location.search, universe.listtags]);
 
   useEffect(() => {
     handleResult();
-  }, [search.keyword, currentPage, search.sort, search.status]);
+  }, [search.keyword, currentPage, search.sort, search.status, search.tags]);
 
   return (
     <>
-      <div className="mb-[30px] max-w-[1224px] mx-auto">
-        <div className="overflow-hidden text-left text-sm text-character-primary-85 font-footnote-description">
-          {/* <div className="bg-character-primaryinverse w-full overflow-hidden text-left text-base text-character-title-85 font-h5-medium"> */}
-          <SearchTitle keyword={search.keyword} />
+      <div>
+        <div className="mb-[30px] max-w-[1224px] mx-auto">
+          <div className="overflow-hidden text-left text-sm text-character-primary-85 font-footnote-description">
+            {/* <div className="bg-character-primaryinverse w-full overflow-hidden text-left text-base text-character-title-85 font-h5-medium"> */}
+            <SearchTitle keyword={search.keyword} />
+          </div>
         </div>
       </div>
-      <div className="bg-whitesmoke">
+      <div className="bg-whitesmoke grow">
         <div className="max-w-[1224px] mx-auto py-6">
           <div className="text-left text-sm text-character-primary-85 font-footnote-description">
             <div className="flex gap-[24px]">
@@ -117,16 +135,19 @@ const Search: FunctionComponent = () => {
                   {/* Danh sách kết quả ở đây */}
                   {renderQuestionPreview()}
                   <div className="flex justify-center mt-4">
-                    <Pagination
-                      count={search.result?.meta?.totalPages}
-                      onChange={(e, value) => {
-                        setCurrentPage(value);
-                      }}
-                    />
+                    {search.result !== null &&
+                      search.result.data?.length !== 0 && (
+                        <Pagination
+                          count={search.result?.meta?.totalPages}
+                          onChange={(e, value) => {
+                            setCurrentPage(value);
+                          }}
+                        />
+                      )}
                   </div>
                 </div>
               </div>
-              <TagList tags={universe.tags} />
+              <TagList tags={universe.toptags} />
             </div>
           </div>
         </div>

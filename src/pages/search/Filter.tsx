@@ -39,7 +39,7 @@ const Filter: FunctionComponent = () => {
         <div className="flex items-center flex-row px-[24px] py-3">
           <div className="me-[24px] text-base">Tag:</div>
           <div className="shrink-0 flex flex-row items-center gap-[8px] grow">
-            <InputTag options={universe.tags} />
+            <InputTag options={universe.listtags} />
           </div>
         </div>
 

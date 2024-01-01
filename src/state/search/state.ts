@@ -3,7 +3,7 @@ import { type IQuestion } from "../questionList/state";
 
 export interface IFilter {
   keyword?: string;
-  tags?: string[];
+  tags?: string[] | ITag[];
   status?: TStatus;
   sort?: TSort;
   page?: number;
