@@ -25,7 +25,7 @@ export const createAnswer = async (data: unknown) => {
 };
 
 export const questionDetail = async (questionId: number) => {
-  const response = await apiHelper.get(`/question/${questionId}`);
+  const response = await apiHelper.get(`/question/${questionId}?userId=1`);
   return response.data;
 };
 

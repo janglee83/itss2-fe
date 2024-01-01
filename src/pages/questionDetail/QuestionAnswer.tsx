@@ -94,7 +94,11 @@ const QuestionAnswer: FunctionComponent<IQuestionAnswer> = ({
         ></div>
         <div className="z-[2] text-sm text-character-secondary-45 flex gap-[16px]">
           <div className="flex items-center gap-[8px]">
-            <HeartSvg className="cursor-pointer" answerId={answer.id} />
+            <HeartSvg
+              className="cursor-pointer"
+              answerId={answer.id}
+              isLikeByUser={answer.is_liked}
+            />
             <div className="relative leading-[22px]">{answer.likeCount}</div>
           </div>
           {acceptedAnswerId === answer.id && (
