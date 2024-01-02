@@ -7,7 +7,7 @@ import { type AppDispatch, type RootState } from "@/state/store";
 import { fetchListQuestion } from "state/questionList/reducer";
 import { Pagination } from "@mui/material";
 import { setIsLoading } from "state/universe";
-import { fetchTopTag } from "state/universe/reducer";
+import { fetchListTag, fetchTopTag } from "state/universe/reducer";
 
 const Home: FunctionComponent = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -34,6 +34,18 @@ const Home: FunctionComponent = () => {
   const handleGetAllTags = (): void => {
     dispatch(setIsLoading(true));
 
+    dispatch(fetchListTag())
+      .catch((error) => {
+        console.log(error);
+      })
+      .finally(() => {
+        dispatch(setIsLoading(false));
+      });
+  };
+
+  const handleGetTopTags = (): void => {
+    dispatch(setIsLoading(true));
+
     dispatch(fetchTopTag())
       .catch((error) => {
         console.log(error);
@@ -46,6 +58,7 @@ const Home: FunctionComponent = () => {
   useEffect(() => {
     handleGetListQuestion();
     handleGetAllTags();
+    handleGetTopTags();
   }, []);
 
   useEffect(() => {
