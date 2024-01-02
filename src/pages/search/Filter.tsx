@@ -33,7 +33,7 @@ const Filter: FunctionComponent = () => {
       <div className="text-black bg-neutral-1 border-[1px] border-solid rounded-lg border-gray-100 mb-3">
         <div className="flex flex-row gap-[10px] items-center px-[24px] py-3 border-b-[1px] border-solid border-gray-100">
           <FilterSvg />
-          <h2 className="text-black">Lọc</h2>
+          <h2 className="text-black text-xl">Lọc</h2>
         </div>
 
         <div className="flex items-center flex-row px-[24px] py-3">
@@ -56,7 +56,7 @@ const Filter: FunctionComponent = () => {
               }}
             >
               <div className="shrink-0 flex flex-row items-start justify-start py-[5px] px-4 gap-[4px]">
-                <div className="leading-[22px] z-[0]">Tất cả</div>
+                <div className="leading-[22px] z-[0] text-sm">Tất cả</div>
               </div>
             </div>
             <div
@@ -68,7 +68,7 @@ const Filter: FunctionComponent = () => {
                 handleChangeStatusValue("not resolved");
               }}
             >
-              <div className="leading-[22px]">Chưa giải quyết</div>
+              <div className="leading-[22px] text-sm">Chưa giải quyết</div>
             </div>
             <div
               className={`bg-neutral-1 overflow-hidden flex flex-row items-center justify-start py-[5px] px-4 border-[1px] ml-[-1px] border-solid rounded-r border-neutral-5 cursor-pointer ${
@@ -79,7 +79,7 @@ const Filter: FunctionComponent = () => {
                 handleChangeStatusValue("solved");
               }}
             >
-              <div className="leading-[22px]">Đã giải quyết</div>
+              <div className="leading-[22px] text-sm">Đã giải quyết</div>
             </div>
           </div>
         </div>
@@ -97,7 +97,7 @@ const Filter: FunctionComponent = () => {
               }}
             >
               <div className="shrink-0 flex flex-row items-start justify-start py-[5px] px-4 gap-[4px]">
-                <div className="leading-[22px]">Mới nhất</div>
+                <div className="leading-[22px] text-sm">Mới nhất</div>
               </div>
             </div>
             <div
@@ -109,7 +109,7 @@ const Filter: FunctionComponent = () => {
                 handleChangeSortValue("trending");
               }}
             >
-              <div className="leading-[22px]">Phổ biến</div>
+              <div className="leading-[22px] text-sm">Phổ biến</div>
             </div>
           </div>
         </div>

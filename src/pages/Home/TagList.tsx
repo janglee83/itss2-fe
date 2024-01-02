@@ -48,10 +48,14 @@ const TagList: FunctionComponent<ITagList> = ({ tags }) => {
                   handleSearchByTag(tag);
                 }}
               >
-                <div className="leading-[20px] text-white">{tag.tagname}</div>
+                <div className="leading-[22px] text-white text-sm">
+                  {tag.tagname}
+                </div>
               </div>
               <div className=" text-sm text-character-secondary-45">
-                <div className="relative leading-[22px]">{tag.count}</div>
+                <div className="relative leading-[22px] text-sm">
+                  {tag.count}
+                </div>
               </div>
             </div>
           );

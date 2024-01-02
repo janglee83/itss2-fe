@@ -70,7 +70,7 @@ const HomeHeader: FunctionComponent<IHomeHeader> = ({ sort }) => {
                             }}
                           >
                             <div className="shrink-0 flex flex-row items-start justify-start py-[5px] px-4 gap-[4px]">
-                              <div className="leading-[22px] z-[2]">
+                              <div className="leading-[24px] text-base z-[2]">
                                 Mới nhất
                               </div>
                             </div>
@@ -84,7 +84,9 @@ const HomeHeader: FunctionComponent<IHomeHeader> = ({ sort }) => {
                               handleChangeSortValue("trending");
                             }}
                           >
-                            <div className="leading-[22px]">Phổ biến</div>
+                            <div className="leading-[24px] text-base">
+                              Phổ biến
+                            </div>
                           </div>
                           {/* <div
                     className={`rounded-tl-sm rounded-tr-none rounded-br-none rounded-bl-sm bg-neutral-1 overflow-hidden flex flex-row items-center justify-start py-[5px] px-4 [transform:_rotate(180deg)] ml-[-1px] border-[1px] border-solid  cursor-pointer ${

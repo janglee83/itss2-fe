@@ -58,16 +58,16 @@ const QuestionDetail: FunctionComponent = () => {
     <>
       <div className="bg-character-primaryinverse w-full overflow-hidden text-left text-base text-character-title-85 font-h5-medium">
         <QuestionTitle />
-        <div className="mt-6 max-w-[740px] mx-auto">
+        <div className="mt-6 max-w-[900px] mx-auto">
           <QuestionContent />
           <div
-            className="rounded bg-primary-6 shadow-[0px_2px_0px_rgba(0,_0,_0,_0.04)] overflow-hidden flex flex-row items-center justify-center py-1 px-[15px] gap-[8px] text-center text-sm text-character-primaryinverse border-[1px] border-solid border-primary-6 max-w-[150px] my-[10px]"
+            className="rounded bg-primary-6 shadow-[0px_2px_0px_rgba(0,_0,_0,_0.04)] overflow-hidden flex flex-row items-center justify-center py-1 px-[15px] gap-[8px] text-center text-sm text-character-primaryinverse border-[1px] border-solid border-primary-6 max-w-[180px] my-[16px]"
             onClick={handleToggle}
           >
             <div className="overflow-hidden flex flex-col items-center justify-center fill-white">
               <SingleCommentSvg />
             </div>
-            <div className="relative leading-[22px] text-white">
+            <div className="relative leading-[24px] text-white text-base">
               Viết câu trả lời
             </div>
           </div>
