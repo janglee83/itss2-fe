@@ -57,12 +57,12 @@ const QuestionPreview: FunctionComponent<IQuestionPreview> = ({ question }) => {
       <div className="flex flex-col grow">
         <div className="shrink-0 flex flex-row items-center justify-start gap-[24px] leading-normal">
           <div className="overflow-hidden flex flex-col items-start justify-center">
-            <div className="relative">
+            <div className="relative text-base font-medium">
               {question.isanonymous > 0 ? "Ẩn danh" : author.fullname}
             </div>
           </div>
           <div className="overflow-hidden flex flex-col items-start justify-center text-button-disabled">
-            <div className="relative">
+            <div className="relative text-base">
               {getRelativeTime(question.createdat)}
             </div>
           </div>
@@ -126,7 +126,9 @@ const QuestionPreview: FunctionComponent<IQuestionPreview> = ({ question }) => {
                     key={tag.id}
                     style={{ backgroundColor: tag.color }}
                   >
-                    <div className="relative leading-[22px]">{tag.tagname}</div>
+                    <div className="relative leading-[24px] text-base">
+                      {tag.tagname}
+                    </div>
                   </div>
                 );
               })}

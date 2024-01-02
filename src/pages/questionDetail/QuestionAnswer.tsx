@@ -104,7 +104,9 @@ const QuestionAnswer: FunctionComponent<IQuestionAnswer> = ({
           {acceptedAnswerId === answer.id && (
             <div className="text-accepted leading-[22px] flex items-center gap-[4px]">
               <CheckSvg />
-              <div>Câu trả lời được chấp nhận</div>
+              <div className="text-base font-bold">
+                Câu trả lời được chấp nhận
+              </div>
             </div>
           )}
           {acceptedAnswerId === null && (

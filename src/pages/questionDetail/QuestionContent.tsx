@@ -32,7 +32,7 @@ const QuestionContent: FunctionComponent = () => {
       </div>
       <div className="py-0 px-4 gap-[10px] text-left text-text-default">
         <div className="self-stretch overflow-hidden gap-[24px] flex">
-          <div className="font-medium leading-[24px]">
+          <div className="font-medium leading-[24px] text-[#094067]">
             {questionDetailState.isanonymous > 0
               ? "Ẩn danh"
               : questionDetailState.authorDetail.fullName}
@@ -60,7 +60,7 @@ const QuestionContent: FunctionComponent = () => {
                 key={tag.id}
               >
                 <div className="rounded-sm flex flex-row items-center justify-start py-px px-2 gap-[3px] border-[1px] border-solid">
-                  <div className="relative leading-[20px] text-white">
+                  <div className="relative leading-[24px] text-white text-base">
                     {tag.tagName}
                   </div>
                 </div>
